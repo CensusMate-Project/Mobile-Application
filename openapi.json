@@ -1,0 +1,2437 @@
+{
+  "openapi" : "3.1.0",
+  "info" : {
+    "title" : "Census API",
+    "version" : "dev-0.0.1"
+  },
+  "externalDocs" : {
+    "url" : "/"
+  },
+  "servers" : [ {
+    "url" : "http://localhost:3000"
+  } ],
+  "tags" : [ ],
+  "paths" : {
+    "/api/auth/login" : {
+      "post" : {
+        "tags" : [ "Auth" ],
+        "summary" : "Login to the platform",
+        "description" : "Аутентификация пользователя и получение JWT токена для доступа к защищённым ресурсам",
+        "parameters" : [ ],
+        "requestBody" : {
+          "description" : "Учётные данные пользователя",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/org.censusmate.data.dto.LoginRequestDto"
+              },
+              "examples" : {
+                "Пример" : {
+                  "value" : {
+                    "email" : "admin@census.ru",
+                    "password" : "admin123"
+                  }
+                }
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Успешная аутентификация",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.data.dto.TokenResponseDto"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Неверный email или пароль",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Аккаунт заблокирован администратором",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/auth/me" : {
+      "get" : {
+        "tags" : [ "Auth" ],
+        "summary" : "Get current user info",
+        "description" : "Получить информацию о текущем пользователе",
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "Профиль текущего пользователя",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.data.dto.MeResponseDto"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Токен отсутствует или истёк",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/users" : {
+      "get" : {
+        "tags" : [ "Users" ],
+        "summary" : "All users list",
+        "description" : "Возвращает всех пользователей системы. **Только для администратора.**",
+        "parameters" : [ {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Номер страницы (начиная с 1)",
+          "required" : false,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          }
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "Количество записей на странице",
+          "required" : false,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Список пользователей",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.data.dto.UsersResponseDto"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Недостаточно прав",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      },
+      "post" : {
+        "tags" : [ "Users" ],
+        "summary" : "Create new user",
+        "description" : "Создает нового пользователя. **Только для администратора.**",
+        "parameters" : [ ],
+        "requestBody" : {
+          "description" : "Данные нового пользователя",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/org.censusmate.data.dto.CreateUserRequestDto"
+              },
+              "examples" : {
+                "Создать переписчика" : {
+                  "value" : {
+                    "email" : "agent@census.ru",
+                    "password" : "secret123",
+                    "first_name" : "Иван",
+                    "last_name" : "Иванов",
+                    "role" : "agent"
+                  }
+                }
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Пользователь успешно создан",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.data.dto.UserResponseDto"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Пользователь с таким email уже существует",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Некорректные данные (пустой email, короткий пароль, неверная роль)",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Недостаточно прав",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/users/{id}" : {
+      "get" : {
+        "tags" : [ "Users" ],
+        "summary" : "Get user by ID",
+        "description" : "Возвращает пользователя по UUID. **Только для администратора.**",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "UUID пользователя",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "example" : "550e8400-e29b-41d4-a716-446655440000"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Данные пользователя",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.data.dto.UserResponseDto"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Пользователь не найден",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Недостаточно прав",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      },
+      "put" : {
+        "tags" : [ "Users" ],
+        "summary" : "Update user",
+        "description" : "Обновляет поля профиля пользователя. Передавать только те поля, которые нужно изменить. **Только для администратора.**",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "UUID пользователя",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "Обновляемые поля (все опциональны)",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/org.censusmate.data.dto.UpdateUserRequestDto"
+              },
+              "examples" : {
+                "Изменить имя" : {
+                  "value" : {
+                    "first_name" : "Иван",
+                    "last_name" : "Иванов",
+                    "email" : "agent@census.ru",
+                    "new_password" : null
+                  }
+                }
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Пользователь обновлён",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.data.dto.UserResponseDto"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Пользователь не найден",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Email уже занят другим пользователем",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Недостаточно прав",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/users/{id}/block" : {
+      "post" : {
+        "tags" : [ "Users" ],
+        "summary" : "Block/unblock user",
+        "description" : "Устанавливает статус блокировки. Заблокированный пользователь не может войти в систему. **Только для администратора.**",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "UUID пользователя",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "Статус блокировки",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/org.censusmate.data.dto.BlockUserRequestDto"
+              },
+              "examples" : {
+                "Заблокировать" : {
+                  "value" : {
+                    "is_blocked" : true
+                  }
+                },
+                "Разблокировать" : {
+                  "value" : {
+                    "is_blocked" : false
+                  }
+                }
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Обновлённый пользователь",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.data.dto.UserResponseDto"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Пользователь не найден",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Недостаточно прав",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/events" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "All events list",
+        "description" : "Все переписи. Администратор видит все, агент - только активные.",
+        "parameters" : [ {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Номер страницы (начиная с 1)",
+          "required" : false,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          }
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "Количество записей на странице",
+          "required" : false,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Список переписей",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.data.dto.EventsResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      },
+      "post" : {
+        "tags" : [ "Events" ],
+        "summary" : "Create new event",
+        "description" : "Создает новое событие. **Только для администратора.**",
+        "parameters" : [ ],
+        "requestBody" : {
+          "description" : "Данные для создания события",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/org.censusmate.data.dto.CreateEventRequestDto"
+              },
+              "examples" : {
+                "Создать событие" : {
+                  "value" : {
+                    "name" : "Перепись 2026",
+                    "start_datetime" : "2026-01-01T00:00:00Z",
+                    "end_datetime" : "2026-12-31T23:59:59Z"
+                  }
+                }
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Событие успешно создано",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.data.dto.EventResponseDto"
+                }
+              }
+            }
+          },
+          "409" : {
+            "description" : "Событие пересекается с существующим событием",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Недостаточно прав",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/events/{id}" : {
+      "get" : {
+        "tags" : [ "Events" ],
+        "summary" : "Get event by ID",
+        "description" : "Возвращает событие по UUID. Администратор видит все, агент - только активные.",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "UUID события",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "example" : "550e8400-e29b-41d4-a716-446655440000"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Данные события",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.data.dto.EventResponseDto"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Событие не найдено или недоступно",
+            "headers" : { }
+          },
+          "403" : {
+            "description" : "Недостаточно прав",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      },
+      "put" : {
+        "tags" : [ "Events" ],
+        "summary" : "Update event",
+        "description" : "Обновляет данные события. Передавать только те поля, которые нужно изменить. **Только для администратора.**",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "UUID события",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "example" : "550e8400-e29b-41d4-a716-446655440000"
+        } ],
+        "requestBody" : {
+          "description" : "Данные для обновления события",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/org.censusmate.data.dto.UpdateEventRequestDto"
+              },
+              "examples" : {
+                "Обновить название и даты" : {
+                  "value" : {
+                    "name" : "Перепись 2026 - обновленная",
+                    "start_datetime" : "2026-02-01T00:00:00Z",
+                    "end_datetime" : "2026-11-30T23:59:59Z"
+                  }
+                }
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Событие обновлено",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.data.dto.EventResponseDto"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Событие не найдено",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Недостаточно прав",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      },
+      "delete" : {
+        "tags" : [ "Events" ],
+        "summary" : "Delete event",
+        "description" : "Удаляет событие. **Только для администратора.**",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "UUID события",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "example" : "550e8400-e29b-41d4-a716-446655440000"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Событие удалено",
+            "headers" : { }
+          },
+          "404" : {
+            "description" : "Событие не найдено",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Недостаточно прав",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/address/suggest" : {
+      "get" : {
+        "tags" : [ "Address" ],
+        "summary" : "Suggest address",
+        "description" : "Возвращает подсказки адресов через DaData. Используется на клиенте при вводе адреса.",
+        "parameters" : [ {
+          "name" : "query",
+          "in" : "query",
+          "description" : "Поисковый запрос",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "example" : "Москва Ленина"
+        }, {
+          "name" : "count",
+          "in" : "query",
+          "description" : "Количество подсказок (по умолчанию 5)",
+          "required" : false,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Список подсказок",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.data.dto.AddressSuggestResponseDto"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Пустой или слишком короткий запрос",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/households" : {
+      "get" : {
+        "tags" : [ "Households" ],
+        "summary" : "Get households list",
+        "description" : "Администратор видит все домохозяйства. Агент - только свои.",
+        "parameters" : [ {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Номер страницы (начиная с 1)",
+          "required" : false,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          }
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "Количество записей на странице",
+          "required" : false,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Список домохозяйств",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.data.dto.HouseholdsResponseDto"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Не авторизован",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      },
+      "post" : {
+        "tags" : [ "Households" ],
+        "summary" : "Create household",
+        "description" : "Создаёт новое домохозяйство. Привязывается к текущему агенту и активному событию переписи. Адрес валидируется через DaData.",
+        "parameters" : [ ],
+        "requestBody" : {
+          "description" : "Данные домохозяйства",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/org.censusmate.data.dto.CreateHouseholdRequestDto"
+              },
+              "examples" : {
+                "Пример" : {
+                  "value" : {
+                    "address" : "г Москва, ул Ленина, д 1, кв 5",
+                    "total_residents" : 3,
+                    "dwelling_type" : "apartment",
+                    "building_year" : "1985",
+                    "total_area" : 72,
+                    "living_area" : 45,
+                    "rooms_count" : 3,
+                    "notes" : null
+                  }
+                }
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Домохозяйство успешно создано",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.data.dto.HouseholdResponseDto"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Некорректный адрес или нет активного события переписи",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "Не авторизован",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/households/{id}" : {
+      "get" : {
+        "tags" : [ "Households" ],
+        "summary" : "Get household by ID",
+        "description" : "Агент может получить только своё домохозяйство.",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "UUID домохозяйства",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "example" : "550e8400-e29b-41d4-a716-446655440000"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Данные домохозяйства",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.data.dto.HouseholdResponseDto"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Домохозяйство не найдено",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Нет доступа к чужому домохозяйству",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      },
+      "put" : {
+        "tags" : [ "Households" ],
+        "summary" : "Update household",
+        "description" : "Агент может обновить только своё домохозяйство. Если передан адрес - валидируется через DaData.",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "UUID домохозяйства",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        } ],
+        "requestBody" : {
+          "description" : "Обновляемые поля (все опциональны)",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/org.censusmate.data.dto.UpdateHouseholdRequestDto"
+              },
+              "examples" : {
+                "Пример" : {
+                  "value" : {
+                    "address" : null,
+                    "total_residents" : 4,
+                    "dwelling_type" : null,
+                    "building_year" : null,
+                    "total_area" : null,
+                    "living_area" : null,
+                    "rooms_count" : null,
+                    "notes" : "Обновлено после повторного обхода"
+                  }
+                }
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Домохозяйство обновлено",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.data.dto.HouseholdResponseDto"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Домохозяйство не найдено",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Нет доступа к чужому домохозяйству",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Некорректный адрес",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      },
+      "delete" : {
+        "tags" : [ "Households" ],
+        "summary" : "Delete household",
+        "description" : "Удаляет домохозяйство и всех жителей (CASCADE). Агент может удалить только своё.",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "UUID домохозяйства",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Домохозяйство удалено",
+            "headers" : { }
+          },
+          "404" : {
+            "description" : "Домохозяйство не найдено",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Нет доступа к чужому домохозяйству",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/households/{householdId}/persons" : {
+      "get" : {
+        "tags" : [ "Persons" ],
+        "summary" : "Get persons in household",
+        "description" : "Возвращает список жителей домохозяйства с пагинацией.",
+        "parameters" : [ {
+          "name" : "householdId",
+          "in" : "path",
+          "description" : "UUID домохозяйства",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "example" : "550e8400-e29b-41d4-a716-446655440000"
+        }, {
+          "name" : "page",
+          "in" : "query",
+          "description" : "Номер страницы (начиная с 1)",
+          "required" : false,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          }
+        }, {
+          "name" : "limit",
+          "in" : "query",
+          "description" : "Количество записей на странице",
+          "required" : false,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Список жителей",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.data.dto.PersonsResponseDto"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Домохозяйство не найдено",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      },
+      "post" : {
+        "tags" : [ "Persons" ],
+        "summary" : "Add person to household",
+        "description" : "Добавляет нового жителя в домохозяйство.",
+        "parameters" : [ {
+          "name" : "householdId",
+          "in" : "path",
+          "description" : "UUID домохозяйства",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "example" : "550e8400-e29b-41d4-a716-446655440000"
+        } ],
+        "requestBody" : {
+          "description" : "Данные жителя",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/org.censusmate.data.dto.CreatePersonRequestDto"
+              },
+              "examples" : {
+                "Пример" : {
+                  "value" : {
+                    "gender" : "male",
+                    "birth_date" : "1985-03-20",
+                    "citizenship" : "Россия",
+                    "has_dual_citizenship" : null,
+                    "nationality" : "Русский",
+                    "native_language" : "Русский",
+                    "speaks_russian" : true,
+                    "other_languages" : [ ],
+                    "education_level" : "higher",
+                    "marital_status" : "married",
+                    "children_count" : 2,
+                    "relation_to_household" : "head",
+                    "place_of_birth" : null,
+                    "current_residence" : null,
+                    "income_sources" : [ "salary" ],
+                    "employment_status" : "employed"
+                  }
+                }
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Житель добавлен",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.data.dto.PersonResponseDto"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Некорректные данные",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Домохозяйство не найдено",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/persons/{personId}" : {
+      "get" : {
+        "tags" : [ "Persons" ],
+        "summary" : "Get person by ID",
+        "parameters" : [ {
+          "name" : "personId",
+          "in" : "path",
+          "description" : "UUID жителя",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "example" : "550e8400-e29b-41d4-a716-446655440000"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Данные жителя",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.data.dto.PersonResponseDto"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Житель не найден",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      },
+      "put" : {
+        "tags" : [ "Persons" ],
+        "summary" : "Update person",
+        "description" : "Обновляет данные жителя. Все поля опциональны.",
+        "parameters" : [ {
+          "name" : "personId",
+          "in" : "path",
+          "description" : "UUID жителя",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "example" : "550e8400-e29b-41d4-a716-446655440000"
+        } ],
+        "requestBody" : {
+          "description" : "Обновляемые поля",
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/org.censusmate.data.dto.UpdatePersonRequestDto"
+              },
+              "examples" : {
+                "Пример" : {
+                  "value" : {
+                    "gender" : null,
+                    "birth_date" : null,
+                    "citizenship" : null,
+                    "has_dual_citizenship" : null,
+                    "nationality" : null,
+                    "native_language" : null,
+                    "speaks_russian" : null,
+                    "other_languages" : null,
+                    "education_level" : null,
+                    "marital_status" : null,
+                    "children_count" : 3,
+                    "relation_to_household" : null,
+                    "place_of_birth" : null,
+                    "current_residence" : null,
+                    "income_sources" : null,
+                    "employment_status" : "retired"
+                  }
+                }
+              }
+            }
+          },
+          "required" : false
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Житель обновлён",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.data.dto.PersonResponseDto"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Житель не найден",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "Некорректные данные",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      },
+      "delete" : {
+        "tags" : [ "Persons" ],
+        "summary" : "Delete person",
+        "description" : "Удаляет жителя. Агент может удалить только жителя своего домохозяйства.",
+        "parameters" : [ {
+          "name" : "personId",
+          "in" : "path",
+          "description" : "UUID жителя",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "example" : "550e8400-e29b-41d4-a716-446655440000"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "Житель удалён",
+            "headers" : { }
+          },
+          "404" : {
+            "description" : "Житель не найден",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Нет доступа",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    },
+    "/api/stats/{id}" : {
+      "get" : {
+        "tags" : [ "Stats" ],
+        "summary" : "Get event statistics",
+        "description" : "Возвращает подробную статистику по событию переписи. **Только для администратора.**",
+        "parameters" : [ {
+          "name" : "id",
+          "in" : "path",
+          "description" : "UUID события переписи",
+          "required" : true,
+          "deprecated" : false,
+          "explode" : false,
+          "schema" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "example" : "550e8400-e29b-41d4-a716-446655440000"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Статистика события",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.data.dto.StatsResponseDto"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "Событие не найдено",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          },
+          "403" : {
+            "description" : "Недостаточно прав",
+            "headers" : { },
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "deprecated" : false
+      }
+    }
+  },
+  "components" : {
+    "schemas" : {
+      "org.censusmate.data.dto.LoginRequestDto" : {
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "password" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        },
+        "required" : [ "email", "password" ],
+        "title" : "LoginRequestDto"
+      },
+      "org.censusmate.data.dto.TokenResponseDto" : {
+        "type" : "object",
+        "properties" : {
+          "token" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "token_type" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        },
+        "required" : [ "token", "token_type" ],
+        "title" : "TokenResponseDto"
+      },
+      "org.censusmate.plugins.ErrorResponseDto" : {
+        "type" : "object",
+        "properties" : {
+          "error" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "message" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        },
+        "required" : [ "error", "message" ],
+        "title" : "ErrorResponseDto"
+      },
+      "org.censusmate.data.dto.MeResponseDto" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "email" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "first_name" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "last_name" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "role" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        },
+        "required" : [ "email", "first_name", "id", "last_name", "role" ],
+        "title" : "MeResponseDto"
+      },
+      "org.censusmate.data.dto.UserResponseDto" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "email" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "first_name" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "last_name" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "role" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "is_blocked" : {
+            "type" : "boolean",
+            "title" : "Boolean"
+          },
+          "created_at" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "updated_at" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          }
+        },
+        "required" : [ "created_at", "email", "first_name", "id", "is_blocked", "last_name", "role", "updated_at" ],
+        "title" : "UserResponseDto"
+      },
+      "org.censusmate.data.dto.PaginationResponseDto" : {
+        "type" : "object",
+        "properties" : {
+          "page" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          },
+          "limit" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          },
+          "total" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          },
+          "pages" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          }
+        },
+        "required" : [ "limit", "page", "pages", "total" ],
+        "title" : "PaginationResponseDto"
+      },
+      "org.censusmate.data.dto.UsersResponseDto" : {
+        "type" : "object",
+        "properties" : {
+          "users" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/org.censusmate.data.dto.UserResponseDto"
+            },
+            "title" : "ArrayList<UserResponseDto>"
+          },
+          "pagination" : {
+            "$ref" : "#/components/schemas/org.censusmate.data.dto.PaginationResponseDto"
+          }
+        },
+        "required" : [ "pagination", "users" ],
+        "title" : "UsersResponseDto"
+      },
+      "org.censusmate.data.dto.CreateUserRequestDto" : {
+        "type" : "object",
+        "properties" : {
+          "email" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "password" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "first_name" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "last_name" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "role" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        },
+        "required" : [ "email", "first_name", "last_name", "password", "role" ],
+        "title" : "CreateUserRequestDto"
+      },
+      "org.censusmate.data.dto.UpdateUserRequestDto" : {
+        "type" : "object",
+        "properties" : {
+          "first_name" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "last_name" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "email" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "new_password" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          }
+        },
+        "required" : [ "email", "first_name", "last_name", "new_password" ],
+        "title" : "UpdateUserRequestDto"
+      },
+      "org.censusmate.data.dto.BlockUserRequestDto" : {
+        "type" : "object",
+        "properties" : {
+          "is_blocked" : {
+            "type" : "boolean",
+            "title" : "Boolean"
+          }
+        },
+        "required" : [ "is_blocked" ],
+        "title" : "BlockUserRequestDto"
+      },
+      "org.censusmate.data.dto.EventResponseDto" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "name" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "start_datetime" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "end_datetime" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "is_active" : {
+            "type" : "boolean",
+            "title" : "Boolean"
+          },
+          "created_at" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "updated_at" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          }
+        },
+        "required" : [ "created_at", "end_datetime", "id", "is_active", "name", "start_datetime", "updated_at" ],
+        "title" : "EventResponseDto"
+      },
+      "org.censusmate.data.dto.EventsResponseDto" : {
+        "type" : "object",
+        "properties" : {
+          "events" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/org.censusmate.data.dto.EventResponseDto"
+            },
+            "title" : "ArrayList<EventResponseDto>"
+          },
+          "pagination" : {
+            "$ref" : "#/components/schemas/org.censusmate.data.dto.PaginationResponseDto"
+          }
+        },
+        "required" : [ "events", "pagination" ],
+        "title" : "EventsResponseDto"
+      },
+      "org.censusmate.data.dto.CreateEventRequestDto" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "start_datetime" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "end_datetime" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        },
+        "required" : [ "end_datetime", "name", "start_datetime" ],
+        "title" : "CreateEventRequestDto"
+      },
+      "org.censusmate.data.dto.UpdateEventRequestDto" : {
+        "type" : "object",
+        "properties" : {
+          "name" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "start_datetime" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "end_datetime" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          }
+        },
+        "required" : [ "end_datetime", "name", "start_datetime" ],
+        "title" : "UpdateEventRequestDto"
+      },
+      "org.censusmate.data.dto.AddressSuggestionDto" : {
+        "type" : "object",
+        "properties" : {
+          "value" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "unrestricted_value" : {
+            "type" : "string",
+            "title" : "String"
+          }
+        },
+        "required" : [ "unrestricted_value", "value" ],
+        "title" : "AddressSuggestionDto"
+      },
+      "org.censusmate.data.dto.AddressSuggestResponseDto" : {
+        "type" : "object",
+        "properties" : {
+          "suggestions" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/org.censusmate.data.dto.AddressSuggestionDto"
+            },
+            "title" : "ArrayList<AddressSuggestionDto>"
+          }
+        },
+        "required" : [ "suggestions" ],
+        "title" : "AddressSuggestResponseDto"
+      },
+      "org.censusmate.data.dto.HouseholdResponseDto" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "enumerator_id" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "event_id" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "address" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "total_residents" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          },
+          "dwelling_type" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "building_year" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "total_area" : {
+            "type" : [ "null", "integer" ],
+            "format" : "int32",
+            "title" : "Int"
+          },
+          "living_area" : {
+            "type" : [ "null", "integer" ],
+            "format" : "int32",
+            "title" : "Int"
+          },
+          "rooms_count" : {
+            "type" : [ "null", "integer" ],
+            "format" : "int32",
+            "title" : "Int"
+          },
+          "notes" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "created_at" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "updated_at" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          }
+        },
+        "required" : [ "address", "building_year", "created_at", "dwelling_type", "enumerator_id", "event_id", "id", "living_area", "notes", "rooms_count", "total_area", "total_residents", "updated_at" ],
+        "title" : "HouseholdResponseDto"
+      },
+      "org.censusmate.data.dto.HouseholdsResponseDto" : {
+        "type" : "object",
+        "properties" : {
+          "households" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/org.censusmate.data.dto.HouseholdResponseDto"
+            },
+            "title" : "ArrayList<HouseholdResponseDto>"
+          },
+          "pagination" : {
+            "$ref" : "#/components/schemas/org.censusmate.data.dto.PaginationResponseDto"
+          }
+        },
+        "required" : [ "households", "pagination" ],
+        "title" : "HouseholdsResponseDto"
+      },
+      "org.censusmate.data.dto.CreateHouseholdRequestDto" : {
+        "type" : "object",
+        "properties" : {
+          "address" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "total_residents" : {
+            "type" : "integer",
+            "format" : "int32",
+            "title" : "Int"
+          },
+          "dwelling_type" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "building_year" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "total_area" : {
+            "type" : [ "null", "integer" ],
+            "format" : "int32",
+            "title" : "Int"
+          },
+          "living_area" : {
+            "type" : [ "null", "integer" ],
+            "format" : "int32",
+            "title" : "Int"
+          },
+          "rooms_count" : {
+            "type" : [ "null", "integer" ],
+            "format" : "int32",
+            "title" : "Int"
+          },
+          "notes" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          }
+        },
+        "required" : [ "address", "building_year", "dwelling_type", "living_area", "notes", "rooms_count", "total_area", "total_residents" ],
+        "title" : "CreateHouseholdRequestDto"
+      },
+      "org.censusmate.data.dto.UpdateHouseholdRequestDto" : {
+        "type" : "object",
+        "properties" : {
+          "address" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "total_residents" : {
+            "type" : [ "null", "integer" ],
+            "format" : "int32",
+            "title" : "Int"
+          },
+          "dwelling_type" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "building_year" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "total_area" : {
+            "type" : [ "null", "integer" ],
+            "format" : "int32",
+            "title" : "Int"
+          },
+          "living_area" : {
+            "type" : [ "null", "integer" ],
+            "format" : "int32",
+            "title" : "Int"
+          },
+          "rooms_count" : {
+            "type" : [ "null", "integer" ],
+            "format" : "int32",
+            "title" : "Int"
+          },
+          "notes" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          }
+        },
+        "required" : [ "address", "building_year", "dwelling_type", "living_area", "notes", "rooms_count", "total_area", "total_residents" ],
+        "title" : "UpdateHouseholdRequestDto"
+      },
+      "org.censusmate.data.dto.PersonResponseDto" : {
+        "type" : "object",
+        "properties" : {
+          "id" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "household_id" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "gender" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "birth_date" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "citizenship" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "has_dual_citizenship" : {
+            "type" : [ "null", "boolean" ],
+            "title" : "Boolean"
+          },
+          "nationality" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "native_language" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "speaks_russian" : {
+            "type" : [ "null", "boolean" ],
+            "title" : "Boolean"
+          },
+          "other_languages" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "title" : "String"
+            },
+            "title" : "ArrayList<String>"
+          },
+          "education_level" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "marital_status" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "children_count" : {
+            "type" : [ "null", "integer" ],
+            "format" : "int32",
+            "title" : "Int"
+          },
+          "relation_to_household" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "place_of_birth" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "current_residence" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "income_sources" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "title" : "String"
+            },
+            "title" : "ArrayList<String>"
+          },
+          "employment_status" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "created_at" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "updated_at" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          }
+        },
+        "required" : [ "birth_date", "children_count", "citizenship", "created_at", "current_residence", "education_level", "employment_status", "gender", "has_dual_citizenship", "household_id", "id", "income_sources", "marital_status", "nationality", "native_language", "other_languages", "place_of_birth", "relation_to_household", "speaks_russian", "updated_at" ],
+        "title" : "PersonResponseDto"
+      },
+      "org.censusmate.data.dto.PersonsResponseDto" : {
+        "type" : "object",
+        "properties" : {
+          "persons" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/org.censusmate.data.dto.PersonResponseDto"
+            },
+            "title" : "ArrayList<PersonResponseDto>"
+          },
+          "pagination" : {
+            "$ref" : "#/components/schemas/org.censusmate.data.dto.PaginationResponseDto"
+          }
+        },
+        "required" : [ "pagination", "persons" ],
+        "title" : "PersonsResponseDto"
+      },
+      "org.censusmate.data.dto.CreatePersonRequestDto" : {
+        "type" : "object",
+        "properties" : {
+          "gender" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "birth_date" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "citizenship" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "has_dual_citizenship" : {
+            "type" : [ "null", "boolean" ],
+            "title" : "Boolean"
+          },
+          "nationality" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "native_language" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "speaks_russian" : {
+            "type" : [ "null", "boolean" ],
+            "title" : "Boolean"
+          },
+          "other_languages" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "title" : "String"
+            },
+            "title" : "ArrayList<String>"
+          },
+          "education_level" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "marital_status" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "children_count" : {
+            "type" : [ "null", "integer" ],
+            "format" : "int32",
+            "title" : "Int"
+          },
+          "relation_to_household" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "place_of_birth" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "current_residence" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "income_sources" : {
+            "type" : "array",
+            "items" : {
+              "type" : "string",
+              "title" : "String"
+            },
+            "title" : "ArrayList<String>"
+          },
+          "employment_status" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          }
+        },
+        "required" : [ "birth_date", "children_count", "citizenship", "current_residence", "education_level", "employment_status", "gender", "has_dual_citizenship", "income_sources", "marital_status", "nationality", "native_language", "other_languages", "place_of_birth", "relation_to_household", "speaks_russian" ],
+        "title" : "CreatePersonRequestDto"
+      },
+      "org.censusmate.data.dto.UpdatePersonRequestDto" : {
+        "type" : "object",
+        "properties" : {
+          "gender" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "birth_date" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "citizenship" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "has_dual_citizenship" : {
+            "type" : [ "null", "boolean" ],
+            "title" : "Boolean"
+          },
+          "nationality" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "native_language" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "speaks_russian" : {
+            "type" : [ "null", "boolean" ],
+            "title" : "Boolean"
+          },
+          "other_languages" : {
+            "type" : [ "null", "array" ],
+            "items" : {
+              "type" : "string",
+              "title" : "String"
+            },
+            "title" : "ArrayList<String>"
+          },
+          "education_level" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "marital_status" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "children_count" : {
+            "type" : [ "null", "integer" ],
+            "format" : "int32",
+            "title" : "Int"
+          },
+          "relation_to_household" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "place_of_birth" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "current_residence" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          },
+          "income_sources" : {
+            "type" : [ "null", "array" ],
+            "items" : {
+              "type" : "string",
+              "title" : "String"
+            },
+            "title" : "ArrayList<String>"
+          },
+          "employment_status" : {
+            "type" : [ "null", "string" ],
+            "title" : "String"
+          }
+        },
+        "required" : [ "birth_date", "children_count", "citizenship", "current_residence", "education_level", "employment_status", "gender", "has_dual_citizenship", "income_sources", "marital_status", "nationality", "native_language", "other_languages", "place_of_birth", "relation_to_household", "speaks_russian" ],
+        "title" : "UpdatePersonRequestDto"
+      },
+      "org.censusmate.data.dto.LanguageCountDto" : {
+        "type" : "object",
+        "properties" : {
+          "language" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "count" : {
+            "type" : "integer",
+            "format" : "int64",
+            "title" : "Long"
+          }
+        },
+        "required" : [ "count", "language" ],
+        "title" : "LanguageCountDto"
+      },
+      "org.censusmate.data.dto.StatsResponseDto" : {
+        "type" : "object",
+        "properties" : {
+          "event_id" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "event_name" : {
+            "type" : "string",
+            "title" : "String"
+          },
+          "total_population" : {
+            "type" : "integer",
+            "format" : "int64",
+            "title" : "Long"
+          },
+          "total_households" : {
+            "type" : "integer",
+            "format" : "int64",
+            "title" : "Long"
+          },
+          "avg_persons_per_household" : {
+            "type" : "number",
+            "format" : "double",
+            "title" : "Double"
+          },
+          "gender_distribution" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "integer",
+              "format" : "int64",
+              "title" : "Long"
+            },
+            "title" : "LinkedHashMap<String,Long>"
+          },
+          "average_age" : {
+            "type" : "number",
+            "format" : "double",
+            "title" : "Double"
+          },
+          "children_count" : {
+            "type" : "integer",
+            "format" : "int64",
+            "title" : "Long"
+          },
+          "elderly_count" : {
+            "type" : "integer",
+            "format" : "int64",
+            "title" : "Long"
+          },
+          "marital_status_distribution" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "integer",
+              "format" : "int64",
+              "title" : "Long"
+            },
+            "title" : "LinkedHashMap<String,Long>"
+          },
+          "avg_children_count" : {
+            "type" : "number",
+            "format" : "double",
+            "title" : "Double"
+          },
+          "education_distribution" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "integer",
+              "format" : "int64",
+              "title" : "Long"
+            },
+            "title" : "LinkedHashMap<String,Long>"
+          },
+          "employment_distribution" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "integer",
+              "format" : "int64",
+              "title" : "Long"
+            },
+            "title" : "LinkedHashMap<String,Long>"
+          },
+          "income_sources_distribution" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "integer",
+              "format" : "int64",
+              "title" : "Long"
+            },
+            "title" : "LinkedHashMap<String,Long>"
+          },
+          "percent_speaks_russian" : {
+            "type" : "number",
+            "format" : "double",
+            "title" : "Double"
+          },
+          "dual_citizenship_count" : {
+            "type" : "integer",
+            "format" : "int64",
+            "title" : "Long"
+          },
+          "top_other_languages" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/org.censusmate.data.dto.LanguageCountDto"
+            },
+            "title" : "ArrayList<LanguageCountDto>"
+          },
+          "dwelling_type_distribution" : {
+            "type" : "object",
+            "additionalProperties" : {
+              "type" : "integer",
+              "format" : "int64",
+              "title" : "Long"
+            },
+            "title" : "LinkedHashMap<String,Long>"
+          },
+          "avg_total_area" : {
+            "type" : "number",
+            "format" : "double",
+            "title" : "Double"
+          },
+          "avg_living_area" : {
+            "type" : "number",
+            "format" : "double",
+            "title" : "Double"
+          }
+        },
+        "required" : [ "average_age", "avg_children_count", "avg_living_area", "avg_persons_per_household", "avg_total_area", "children_count", "dual_citizenship_count", "dwelling_type_distribution", "education_distribution", "elderly_count", "employment_distribution", "event_id", "event_name", "gender_distribution", "income_sources_distribution", "marital_status_distribution", "percent_speaks_russian", "top_other_languages", "total_households", "total_population" ],
+        "title" : "StatsResponseDto"
+      }
+    },
+    "examples" : { },
+    "securitySchemes" : {
+      "BearerAuth" : {
+        "type" : "http",
+        "scheme" : "bearer",
+        "bearerFormat" : "JWT"
+      }
+    }
+  },
+  "webhooks" : { }
+}
