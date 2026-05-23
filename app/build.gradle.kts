@@ -5,6 +5,8 @@ plugins {
     alias(libs.plugins.openapi.generator)
 }
 
+val openApiOutputDir = "${layout.buildDirectory.get()}/generated/openapi"
+
 android {
     namespace = "org.censusmate.mobile"
     compileSdk {
@@ -39,21 +41,30 @@ android {
     buildFeatures {
         compose = true
     }
+
+    sourceSets {
+        getByName("main") {
+            java.srcDir("$openApiOutputDir/src/main/kotlin")
+        }
+    }
 }
 
-val openApiOutputDir = "${layout.buildDirectory.get()}/generated/openapi"
 openApiGenerate {
     generatorName.set("kotlin")
     inputSpec.set("$rootDir/openapi.json")
     outputDir.set(openApiOutputDir)
-    apiPackage.set("org.censusmate.data.remote.api")
-    modelPackage.set("org.censusmate.data.remote.model")
+    apiPackage.set("org.censusmate.api")
+    modelPackage.set("org.censusmate.model")
+
+    cleanupOutput.set(true)
+
     configOptions.set(
         mapOf(
             "library" to "jvm-ktor",
             "serializationLibrary" to "kotlinx_serialization",
             "dateLibrary" to "string",
-            "useCoroutines" to "true"
+            "useCoroutines" to "true",
+            "useTags" to "false"
         )
     )
 }
@@ -81,6 +92,7 @@ dependencies {
     implementation(libs.ktor.client.content.negotiation)
     implementation(libs.ktor.serialization.kotlinx.json)
     implementation(libs.ktor.client.logging)
+    implementation(libs.ktor.client.auth)
 
     implementation(libs.logging.interceptor)
 
