@@ -23,7 +23,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/org.censusmate.data.dto.LoginRequestDto"
+                "$ref" : "#/components/schemas/LoginRequestDto"
               },
               "examples" : {
                 "Пример" : {
@@ -44,7 +44,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.data.dto.TokenResponseDto"
+                  "$ref" : "#/components/schemas/TokenResponseDto"
                 }
               }
             }
@@ -55,7 +55,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -66,7 +66,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -88,7 +88,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.data.dto.MeResponseDto"
+                  "$ref" : "#/components/schemas/MeResponseDto"
                 }
               }
             }
@@ -99,7 +99,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -145,7 +145,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.data.dto.UsersResponseDto"
+                  "$ref" : "#/components/schemas/UsersResponseDto"
                 }
               }
             }
@@ -156,7 +156,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -174,7 +174,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/org.censusmate.data.dto.CreateUserRequestDto"
+                "$ref" : "#/components/schemas/CreateUserRequestDto"
               },
               "examples" : {
                 "Создать переписчика" : {
@@ -198,7 +198,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.data.dto.UserResponseDto"
+                  "$ref" : "#/components/schemas/UserResponseDto"
                 }
               }
             }
@@ -209,7 +209,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -220,7 +220,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -231,7 +231,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -265,7 +265,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.data.dto.UserResponseDto"
+                  "$ref" : "#/components/schemas/UserResponseDto"
                 }
               }
             }
@@ -276,7 +276,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -287,7 +287,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -316,7 +316,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/org.censusmate.data.dto.UpdateUserRequestDto"
+                "$ref" : "#/components/schemas/UpdateUserRequestDto"
               },
               "examples" : {
                 "Изменить имя" : {
@@ -339,7 +339,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.data.dto.UserResponseDto"
+                  "$ref" : "#/components/schemas/UserResponseDto"
                 }
               }
             }
@@ -350,7 +350,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -361,7 +361,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -372,7 +372,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -403,7 +403,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/org.censusmate.data.dto.BlockUserRequestDto"
+                "$ref" : "#/components/schemas/BlockUserRequestDto"
               },
               "examples" : {
                 "Заблокировать" : {
@@ -428,7 +428,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.data.dto.UserResponseDto"
+                  "$ref" : "#/components/schemas/UserResponseDto"
                 }
               }
             }
@@ -439,7 +439,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -450,7 +450,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -496,7 +496,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.data.dto.EventsResponseDto"
+                  "$ref" : "#/components/schemas/EventsResponseDto"
                 }
               }
             }
@@ -514,7 +514,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/org.censusmate.data.dto.CreateEventRequestDto"
+                "$ref" : "#/components/schemas/CreateEventRequestDto"
               },
               "examples" : {
                 "Создать событие" : {
@@ -536,7 +536,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.data.dto.EventResponseDto"
+                  "$ref" : "#/components/schemas/EventResponseDto"
                 }
               }
             }
@@ -547,7 +547,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -558,7 +558,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -592,7 +592,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.data.dto.EventResponseDto"
+                  "$ref" : "#/components/schemas/EventResponseDto"
                 }
               }
             }
@@ -607,7 +607,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -637,7 +637,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/org.censusmate.data.dto.UpdateEventRequestDto"
+                "$ref" : "#/components/schemas/UpdateEventRequestDto"
               },
               "examples" : {
                 "Обновить название и даты" : {
@@ -659,7 +659,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.data.dto.EventResponseDto"
+                  "$ref" : "#/components/schemas/EventResponseDto"
                 }
               }
             }
@@ -670,7 +670,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -681,7 +681,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -717,7 +717,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -728,7 +728,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -774,7 +774,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.data.dto.AddressSuggestResponseDto"
+                  "$ref" : "#/components/schemas/AddressSuggestResponseDto"
                 }
               }
             }
@@ -785,7 +785,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -831,7 +831,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.data.dto.HouseholdsResponseDto"
+                  "$ref" : "#/components/schemas/HouseholdsResponseDto"
                 }
               }
             }
@@ -842,7 +842,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -860,7 +860,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/org.censusmate.data.dto.CreateHouseholdRequestDto"
+                "$ref" : "#/components/schemas/CreateHouseholdRequestDto"
               },
               "examples" : {
                 "Пример" : {
@@ -887,7 +887,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.data.dto.HouseholdResponseDto"
+                  "$ref" : "#/components/schemas/HouseholdResponseDto"
                 }
               }
             }
@@ -898,7 +898,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -909,7 +909,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -943,7 +943,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.data.dto.HouseholdResponseDto"
+                  "$ref" : "#/components/schemas/HouseholdResponseDto"
                 }
               }
             }
@@ -954,7 +954,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -965,7 +965,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -994,7 +994,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/org.censusmate.data.dto.UpdateHouseholdRequestDto"
+                "$ref" : "#/components/schemas/UpdateHouseholdRequestDto"
               },
               "examples" : {
                 "Пример" : {
@@ -1021,7 +1021,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.data.dto.HouseholdResponseDto"
+                  "$ref" : "#/components/schemas/HouseholdResponseDto"
                 }
               }
             }
@@ -1032,7 +1032,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -1043,7 +1043,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -1054,7 +1054,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -1089,7 +1089,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -1100,7 +1100,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -1158,7 +1158,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.data.dto.PersonsResponseDto"
+                  "$ref" : "#/components/schemas/PersonsResponseDto"
                 }
               }
             }
@@ -1169,7 +1169,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -1199,7 +1199,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/org.censusmate.data.dto.CreatePersonRequestDto"
+                "$ref" : "#/components/schemas/CreatePersonRequestDto"
               },
               "examples" : {
                 "Пример" : {
@@ -1234,7 +1234,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.data.dto.PersonResponseDto"
+                  "$ref" : "#/components/schemas/PersonResponseDto"
                 }
               }
             }
@@ -1245,7 +1245,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -1256,7 +1256,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -1289,7 +1289,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.data.dto.PersonResponseDto"
+                  "$ref" : "#/components/schemas/PersonResponseDto"
                 }
               }
             }
@@ -1300,7 +1300,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -1330,7 +1330,7 @@
           "content" : {
             "application/json" : {
               "schema" : {
-                "$ref" : "#/components/schemas/org.censusmate.data.dto.UpdatePersonRequestDto"
+                "$ref" : "#/components/schemas/UpdatePersonRequestDto"
               },
               "examples" : {
                 "Пример" : {
@@ -1365,7 +1365,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.data.dto.PersonResponseDto"
+                  "$ref" : "#/components/schemas/PersonResponseDto"
                 }
               }
             }
@@ -1376,7 +1376,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -1387,7 +1387,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -1423,7 +1423,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -1434,7 +1434,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -1468,7 +1468,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.data.dto.StatsResponseDto"
+                  "$ref" : "#/components/schemas/StatsResponseDto"
                 }
               }
             }
@@ -1479,7 +1479,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -1490,7 +1490,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/org.censusmate.plugins.ErrorResponseDto"
+                  "$ref" : "#/components/schemas/ErrorResponseDto"
                 }
               }
             }
@@ -1502,7 +1502,7 @@
   },
   "components" : {
     "schemas" : {
-      "org.censusmate.data.dto.LoginRequestDto" : {
+      "LoginRequestDto" : {
         "type" : "object",
         "properties" : {
           "email" : {
@@ -1517,7 +1517,7 @@
         "required" : [ "email", "password" ],
         "title" : "LoginRequestDto"
       },
-      "org.censusmate.data.dto.TokenResponseDto" : {
+      "TokenResponseDto" : {
         "type" : "object",
         "properties" : {
           "token" : {
@@ -1532,7 +1532,7 @@
         "required" : [ "token", "token_type" ],
         "title" : "TokenResponseDto"
       },
-      "org.censusmate.plugins.ErrorResponseDto" : {
+      "ErrorResponseDto" : {
         "type" : "object",
         "properties" : {
           "error" : {
@@ -1547,7 +1547,7 @@
         "required" : [ "error", "message" ],
         "title" : "ErrorResponseDto"
       },
-      "org.censusmate.data.dto.MeResponseDto" : {
+      "MeResponseDto" : {
         "type" : "object",
         "properties" : {
           "id" : {
@@ -1574,7 +1574,7 @@
         "required" : [ "email", "first_name", "id", "last_name", "role" ],
         "title" : "MeResponseDto"
       },
-      "org.censusmate.data.dto.UserResponseDto" : {
+      "UserResponseDto" : {
         "type" : "object",
         "properties" : {
           "id" : {
@@ -1613,7 +1613,7 @@
         "required" : [ "created_at", "email", "first_name", "id", "is_blocked", "last_name", "role", "updated_at" ],
         "title" : "UserResponseDto"
       },
-      "org.censusmate.data.dto.PaginationResponseDto" : {
+      "PaginationResponseDto" : {
         "type" : "object",
         "properties" : {
           "page" : {
@@ -1640,24 +1640,24 @@
         "required" : [ "limit", "page", "pages", "total" ],
         "title" : "PaginationResponseDto"
       },
-      "org.censusmate.data.dto.UsersResponseDto" : {
+      "UsersResponseDto" : {
         "type" : "object",
         "properties" : {
           "users" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/org.censusmate.data.dto.UserResponseDto"
+              "$ref" : "#/components/schemas/UserResponseDto"
             },
             "title" : "ArrayList<UserResponseDto>"
           },
           "pagination" : {
-            "$ref" : "#/components/schemas/org.censusmate.data.dto.PaginationResponseDto"
+            "$ref" : "#/components/schemas/PaginationResponseDto"
           }
         },
         "required" : [ "pagination", "users" ],
         "title" : "UsersResponseDto"
       },
-      "org.censusmate.data.dto.CreateUserRequestDto" : {
+      "CreateUserRequestDto" : {
         "type" : "object",
         "properties" : {
           "email" : {
@@ -1684,7 +1684,7 @@
         "required" : [ "email", "first_name", "last_name", "password", "role" ],
         "title" : "CreateUserRequestDto"
       },
-      "org.censusmate.data.dto.UpdateUserRequestDto" : {
+      "UpdateUserRequestDto" : {
         "type" : "object",
         "properties" : {
           "first_name" : {
@@ -1707,7 +1707,7 @@
         "required" : [ "email", "first_name", "last_name", "new_password" ],
         "title" : "UpdateUserRequestDto"
       },
-      "org.censusmate.data.dto.BlockUserRequestDto" : {
+      "BlockUserRequestDto" : {
         "type" : "object",
         "properties" : {
           "is_blocked" : {
@@ -1718,7 +1718,7 @@
         "required" : [ "is_blocked" ],
         "title" : "BlockUserRequestDto"
       },
-      "org.censusmate.data.dto.EventResponseDto" : {
+      "EventResponseDto" : {
         "type" : "object",
         "properties" : {
           "id" : {
@@ -1753,24 +1753,24 @@
         "required" : [ "created_at", "end_datetime", "id", "is_active", "name", "start_datetime", "updated_at" ],
         "title" : "EventResponseDto"
       },
-      "org.censusmate.data.dto.EventsResponseDto" : {
+      "EventsResponseDto" : {
         "type" : "object",
         "properties" : {
           "events" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/org.censusmate.data.dto.EventResponseDto"
+              "$ref" : "#/components/schemas/EventResponseDto"
             },
             "title" : "ArrayList<EventResponseDto>"
           },
           "pagination" : {
-            "$ref" : "#/components/schemas/org.censusmate.data.dto.PaginationResponseDto"
+            "$ref" : "#/components/schemas/PaginationResponseDto"
           }
         },
         "required" : [ "events", "pagination" ],
         "title" : "EventsResponseDto"
       },
-      "org.censusmate.data.dto.CreateEventRequestDto" : {
+      "CreateEventRequestDto" : {
         "type" : "object",
         "properties" : {
           "name" : {
@@ -1789,7 +1789,7 @@
         "required" : [ "end_datetime", "name", "start_datetime" ],
         "title" : "CreateEventRequestDto"
       },
-      "org.censusmate.data.dto.UpdateEventRequestDto" : {
+      "UpdateEventRequestDto" : {
         "type" : "object",
         "properties" : {
           "name" : {
@@ -1808,7 +1808,7 @@
         "required" : [ "end_datetime", "name", "start_datetime" ],
         "title" : "UpdateEventRequestDto"
       },
-      "org.censusmate.data.dto.AddressSuggestionDto" : {
+      "AddressSuggestionDto" : {
         "type" : "object",
         "properties" : {
           "value" : {
@@ -1823,13 +1823,13 @@
         "required" : [ "unrestricted_value", "value" ],
         "title" : "AddressSuggestionDto"
       },
-      "org.censusmate.data.dto.AddressSuggestResponseDto" : {
+      "AddressSuggestResponseDto" : {
         "type" : "object",
         "properties" : {
           "suggestions" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/org.censusmate.data.dto.AddressSuggestionDto"
+              "$ref" : "#/components/schemas/AddressSuggestionDto"
             },
             "title" : "ArrayList<AddressSuggestionDto>"
           }
@@ -1837,7 +1837,7 @@
         "required" : [ "suggestions" ],
         "title" : "AddressSuggestResponseDto"
       },
-      "org.censusmate.data.dto.HouseholdResponseDto" : {
+      "HouseholdResponseDto" : {
         "type" : "object",
         "properties" : {
           "id" : {
@@ -1900,24 +1900,24 @@
         "required" : [ "address", "building_year", "created_at", "dwelling_type", "enumerator_id", "event_id", "id", "living_area", "notes", "rooms_count", "total_area", "total_residents", "updated_at" ],
         "title" : "HouseholdResponseDto"
       },
-      "org.censusmate.data.dto.HouseholdsResponseDto" : {
+      "HouseholdsResponseDto" : {
         "type" : "object",
         "properties" : {
           "households" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/org.censusmate.data.dto.HouseholdResponseDto"
+              "$ref" : "#/components/schemas/HouseholdResponseDto"
             },
             "title" : "ArrayList<HouseholdResponseDto>"
           },
           "pagination" : {
-            "$ref" : "#/components/schemas/org.censusmate.data.dto.PaginationResponseDto"
+            "$ref" : "#/components/schemas/PaginationResponseDto"
           }
         },
         "required" : [ "households", "pagination" ],
         "title" : "HouseholdsResponseDto"
       },
-      "org.censusmate.data.dto.CreateHouseholdRequestDto" : {
+      "CreateHouseholdRequestDto" : {
         "type" : "object",
         "properties" : {
           "address" : {
@@ -1960,7 +1960,7 @@
         "required" : [ "address", "building_year", "dwelling_type", "living_area", "notes", "rooms_count", "total_area", "total_residents" ],
         "title" : "CreateHouseholdRequestDto"
       },
-      "org.censusmate.data.dto.UpdateHouseholdRequestDto" : {
+      "UpdateHouseholdRequestDto" : {
         "type" : "object",
         "properties" : {
           "address" : {
@@ -2003,7 +2003,7 @@
         "required" : [ "address", "building_year", "dwelling_type", "living_area", "notes", "rooms_count", "total_area", "total_residents" ],
         "title" : "UpdateHouseholdRequestDto"
       },
-      "org.censusmate.data.dto.PersonResponseDto" : {
+      "PersonResponseDto" : {
         "type" : "object",
         "properties" : {
           "id" : {
@@ -2099,24 +2099,24 @@
         "required" : [ "birth_date", "children_count", "citizenship", "created_at", "current_residence", "education_level", "employment_status", "gender", "has_dual_citizenship", "household_id", "id", "income_sources", "marital_status", "nationality", "native_language", "other_languages", "place_of_birth", "relation_to_household", "speaks_russian", "updated_at" ],
         "title" : "PersonResponseDto"
       },
-      "org.censusmate.data.dto.PersonsResponseDto" : {
+      "PersonsResponseDto" : {
         "type" : "object",
         "properties" : {
           "persons" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/org.censusmate.data.dto.PersonResponseDto"
+              "$ref" : "#/components/schemas/PersonResponseDto"
             },
             "title" : "ArrayList<PersonResponseDto>"
           },
           "pagination" : {
-            "$ref" : "#/components/schemas/org.censusmate.data.dto.PaginationResponseDto"
+            "$ref" : "#/components/schemas/PaginationResponseDto"
           }
         },
         "required" : [ "pagination", "persons" ],
         "title" : "PersonsResponseDto"
       },
-      "org.censusmate.data.dto.CreatePersonRequestDto" : {
+      "CreatePersonRequestDto" : {
         "type" : "object",
         "properties" : {
           "gender" : {
@@ -2196,7 +2196,7 @@
         "required" : [ "birth_date", "children_count", "citizenship", "current_residence", "education_level", "employment_status", "gender", "has_dual_citizenship", "income_sources", "marital_status", "nationality", "native_language", "other_languages", "place_of_birth", "relation_to_household", "speaks_russian" ],
         "title" : "CreatePersonRequestDto"
       },
-      "org.censusmate.data.dto.UpdatePersonRequestDto" : {
+      "UpdatePersonRequestDto" : {
         "type" : "object",
         "properties" : {
           "gender" : {
@@ -2276,7 +2276,7 @@
         "required" : [ "birth_date", "children_count", "citizenship", "current_residence", "education_level", "employment_status", "gender", "has_dual_citizenship", "income_sources", "marital_status", "nationality", "native_language", "other_languages", "place_of_birth", "relation_to_household", "speaks_russian" ],
         "title" : "UpdatePersonRequestDto"
       },
-      "org.censusmate.data.dto.LanguageCountDto" : {
+      "LanguageCountDto" : {
         "type" : "object",
         "properties" : {
           "language" : {
@@ -2292,7 +2292,7 @@
         "required" : [ "count", "language" ],
         "title" : "LanguageCountDto"
       },
-      "org.censusmate.data.dto.StatsResponseDto" : {
+      "StatsResponseDto" : {
         "type" : "object",
         "properties" : {
           "event_id" : {
@@ -2396,7 +2396,7 @@
           "top_other_languages" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/org.censusmate.data.dto.LanguageCountDto"
+              "$ref" : "#/components/schemas/LanguageCountDto"
             },
             "title" : "ArrayList<LanguageCountDto>"
           },
