@@ -5,9 +5,9 @@ import org.censusmate.mobile.data.remote.CensusApi
 import org.censusmate.mobile.domain.model.Paged
 import org.censusmate.mobile.domain.model.User
 import org.censusmate.mobile.domain.repository.UserRepository
-import org.censusmate.model.BlockUserRequestDto
-import org.censusmate.model.CreateUserRequestDto
-import org.censusmate.model.UpdateUserRequestDto
+import org.censusmate.mobile.data.remote.model.BlockUserRequestDto
+import org.censusmate.mobile.data.remote.model.CreateUserRequestDto
+import org.censusmate.mobile.data.remote.model.UpdateUserRequestDto
 
 class UserRepositoryImpl(private val api: CensusApi) : UserRepository {
     override suspend fun getUsers(page: Int, limit: Int): Result<Paged<User>> = runCatching {

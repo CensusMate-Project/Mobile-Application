@@ -5,7 +5,7 @@ import org.censusmate.mobile.data.mapper.toDomain
 import org.censusmate.mobile.data.remote.CensusApi
 import org.censusmate.mobile.domain.model.AuthUser
 import org.censusmate.mobile.domain.repository.AuthRepository
-import org.censusmate.model.LoginRequestDto
+import org.censusmate.mobile.data.remote.model.LoginRequestDto
 
 class AuthRepositoryImpl(
     private val api: CensusApi, private val tokenDataStore: TokenDataStore

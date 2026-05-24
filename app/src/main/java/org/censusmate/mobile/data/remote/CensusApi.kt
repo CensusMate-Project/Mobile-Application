@@ -10,13 +10,13 @@ import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonNamingStrategy
-import org.censusmate.api.AddressApi
-import org.censusmate.api.AuthApi
-import org.censusmate.api.EventsApi
-import org.censusmate.api.HouseholdsApi
-import org.censusmate.api.PersonsApi
-import org.censusmate.api.StatsApi
-import org.censusmate.api.UsersApi
+import org.censusmate.mobile.data.remote.api.AddressApi
+import org.censusmate.mobile.data.remote.api.AuthApi
+import org.censusmate.mobile.data.remote.api.EventsApi
+import org.censusmate.mobile.data.remote.api.HouseholdsApi
+import org.censusmate.mobile.data.remote.api.PersonsApi
+import org.censusmate.mobile.data.remote.api.StatsApi
+import org.censusmate.mobile.data.remote.api.UsersApi
 import org.censusmate.mobile.data.local.TokenDataStore
 
 class CensusApi(tokenDataStore: TokenDataStore) {

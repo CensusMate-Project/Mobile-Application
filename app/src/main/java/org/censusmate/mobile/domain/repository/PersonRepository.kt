@@ -2,8 +2,8 @@ package org.censusmate.mobile.domain.repository
 
 import org.censusmate.mobile.domain.model.Paged
 import org.censusmate.mobile.domain.model.Person
-import org.censusmate.model.CreatePersonRequestDto
-import org.censusmate.model.UpdatePersonRequestDto
+import org.censusmate.mobile.data.remote.model.CreatePersonRequestDto
+import org.censusmate.mobile.data.remote.model.UpdatePersonRequestDto
 
 interface PersonRepository {
     suspend fun getPersons(

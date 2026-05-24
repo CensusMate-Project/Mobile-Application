@@ -5,8 +5,8 @@ import org.censusmate.mobile.data.remote.CensusApi
 import org.censusmate.mobile.domain.model.Paged
 import org.censusmate.mobile.domain.model.Person
 import org.censusmate.mobile.domain.repository.PersonRepository
-import org.censusmate.model.CreatePersonRequestDto
-import org.censusmate.model.UpdatePersonRequestDto
+import org.censusmate.mobile.data.remote.model.CreatePersonRequestDto
+import org.censusmate.mobile.data.remote.model.UpdatePersonRequestDto
 
 class PersonRepositoryImpl(private val api: CensusApi) : PersonRepository {
     override suspend fun getPersons(

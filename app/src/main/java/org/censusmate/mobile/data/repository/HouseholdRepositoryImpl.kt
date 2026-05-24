@@ -5,8 +5,8 @@ import org.censusmate.mobile.data.remote.CensusApi
 import org.censusmate.mobile.domain.model.Household
 import org.censusmate.mobile.domain.model.Paged
 import org.censusmate.mobile.domain.repository.HouseholdRepository
-import org.censusmate.model.CreateHouseholdRequestDto
-import org.censusmate.model.UpdateHouseholdRequestDto
+import org.censusmate.mobile.data.remote.model.CreateHouseholdRequestDto
+import org.censusmate.mobile.data.remote.model.UpdateHouseholdRequestDto
 
 class HouseholdRepositoryImpl(private val api: CensusApi) : HouseholdRepository {
     override suspend fun getHouseholds(page: Int, limit: Int): Result<Paged<Household>> =

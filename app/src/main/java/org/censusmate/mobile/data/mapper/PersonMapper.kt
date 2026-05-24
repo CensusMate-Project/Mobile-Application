@@ -2,8 +2,8 @@ package org.censusmate.mobile.data.mapper
 
 import org.censusmate.mobile.domain.model.Paged
 import org.censusmate.mobile.domain.model.Person
-import org.censusmate.model.PersonResponseDto
-import org.censusmate.model.PersonsResponseDto
+import org.censusmate.mobile.data.remote.model.PersonResponseDto
+import org.censusmate.mobile.data.remote.model.PersonsResponseDto
 
 fun PersonResponseDto.toDomain() = Person(
     id = id,

@@ -2,8 +2,8 @@ package org.censusmate.mobile.data.mapper
 
 import org.censusmate.mobile.domain.model.Event
 import org.censusmate.mobile.domain.model.Paged
-import org.censusmate.model.EventResponseDto
-import org.censusmate.model.EventsResponseDto
+import org.censusmate.mobile.data.remote.model.EventResponseDto
+import org.censusmate.mobile.data.remote.model.EventsResponseDto
 
 fun EventResponseDto.toDomain() = Event(
     id = id,

@@ -5,8 +5,8 @@ import org.censusmate.mobile.data.remote.CensusApi
 import org.censusmate.mobile.domain.model.Event
 import org.censusmate.mobile.domain.model.Paged
 import org.censusmate.mobile.domain.repository.EventRepository
-import org.censusmate.model.CreateEventRequestDto
-import org.censusmate.model.UpdateEventRequestDto
+import org.censusmate.mobile.data.remote.model.CreateEventRequestDto
+import org.censusmate.mobile.data.remote.model.UpdateEventRequestDto
 
 class EventRepositoryImpl(private val api: CensusApi) : EventRepository {
     override suspend fun getEvents(page: Int, limit: Int): Result<Paged<Event>> =

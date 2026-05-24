@@ -2,7 +2,7 @@ package org.censusmate.mobile.data.mapper
 
 import org.censusmate.mobile.domain.model.LanguageCount
 import org.censusmate.mobile.domain.model.Stats
-import org.censusmate.model.StatsResponseDto
+import org.censusmate.mobile.data.remote.model.StatsResponseDto
 
 fun StatsResponseDto.toDomain() = Stats(
     eventId = eventId,

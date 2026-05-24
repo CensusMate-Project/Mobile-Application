@@ -1,11 +1,11 @@
+import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.openapi.generator)
 }
-
-val openApiOutputDir = "${layout.buildDirectory.get()}/generated/openapi"
 
 android {
     namespace = "org.censusmate.mobile"
@@ -42,19 +42,22 @@ android {
         compose = true
     }
 
-    sourceSets {
-        getByName("main") {
-            java.srcDir("$openApiOutputDir/src/main/kotlin")
-        }
+    sourceSets.getByName("main") {
+        kotlin.srcDir("${layout.buildDirectory.get()}/openapi/src/main/kotlin")
     }
+}
+
+tasks.preBuild {
+    dependsOn(tasks.withType(GenerateTask::class))
 }
 
 openApiGenerate {
     generatorName.set("kotlin")
     inputSpec.set("$rootDir/openapi.json")
-    outputDir.set(openApiOutputDir)
-    apiPackage.set("org.censusmate.api")
-    modelPackage.set("org.censusmate.model")
+    outputDir.set("${layout.buildDirectory.get()}/openapi")
+    ignoreFileOverride.set("${projectDir}/.openapi-generator-ignore")
+    apiPackage.set("org.censusmate.mobile.data.remote.api")
+    modelPackage.set("org.censusmate.mobile.data.remote.model")
 
     cleanupOutput.set(true)
 
@@ -67,10 +70,6 @@ openApiGenerate {
             "useTags" to "false"
         )
     )
-}
-
-tasks.named("preBuild") {
-    dependsOn("openApiGenerate")
 }
 
 dependencies {
