@@ -41,6 +41,7 @@ class CensusApi(tokenDataStore: TokenDataStore) {
             logger = Logger.ANDROID
             level = LogLevel.BODY
         }
+        expectSuccess = true
     }
 
     private val baseUrl = "http://10.0.2.2:3000"
