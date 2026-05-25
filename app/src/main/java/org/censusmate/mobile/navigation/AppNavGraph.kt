@@ -9,6 +9,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import org.censusmate.mobile.di.AppContainer
+import org.censusmate.mobile.presentation.census.CensusDetailRoute
+import org.censusmate.mobile.presentation.census.CensusListRoute
+import org.censusmate.mobile.presentation.census.CreateCensusRoute
 import org.censusmate.mobile.presentation.home.HomeRoute
 import org.censusmate.mobile.presentation.login.LoginRoute
 import org.censusmate.mobile.presentation.settings.SettingsRoute
@@ -20,6 +23,7 @@ sealed class Screen(val route: String) {
     object Login : Screen("login")
     object Home : Screen("home")
     object Settings : Screen("settings")
+
     object Users : Screen("users")
     object CreateUser : Screen("users/create")
     object UpdateUser : Screen("users/{userId}") {
@@ -27,13 +31,21 @@ sealed class Screen(val route: String) {
     }
 
     object Events : Screen("events")
-    object Households : Screen("households")
+
+    object Census : Screen("census")
+    object CreateCensus : Screen("census/create")
+    object CensusDetail : Screen("census/{householdId}") {
+        fun createRoute(id: String) = "census/$id"
+    }
+
     object Stats : Screen("stats")
 }
 
 @Composable
 fun AppNavGraph(
-    navController: NavHostController, startDestination: String, container: AppContainer
+    navController: NavHostController,
+    startDestination: String,
+    container: AppContainer
 ) {
     NavHost(
         navController = navController, startDestination = startDestination
@@ -46,7 +58,8 @@ fun AppNavGraph(
                     navController.navigate(Screen.Home.route) {
                         popUpTo(navController.graph.id) { inclusive = true }
                     }
-                })
+                }
+            )
         }
 
         composable(Screen.Home.route) {
@@ -55,7 +68,7 @@ fun AppNavGraph(
                 logoutUseCase = container.logoutUseCase,
                 onNavigateToUsers = { navController.navigate(Screen.Users.route) },
                 onNavigateToEvents = { navController.navigate(Screen.Events.route) },
-                onNavigateToHouseholds = { navController.navigate(Screen.Households.route) },
+                onNavigateToHouseholds = { navController.navigate(Screen.Census.route) },
                 onNavigateToStats = { navController.navigate(Screen.Stats.route) },
                 onNavigateToSettings = { navController.navigate(Screen.Settings.route) },
             )
@@ -78,7 +91,8 @@ fun AppNavGraph(
                 onNavigateToEdit = { id ->
                     navController.navigate(Screen.UpdateUser.createRoute(id))
                 },
-                onBack = { navController.popBackStack() })
+                onBack = { navController.popBackStack() }
+            )
         }
 
         composable(
@@ -97,7 +111,8 @@ fun AppNavGraph(
                         true
                     )
                     navController.popBackStack()
-                })
+                }
+            )
         }
 
         composable(Screen.CreateUser.route) {
@@ -110,7 +125,8 @@ fun AppNavGraph(
                         true
                     )
                     navController.popBackStack()
-                })
+                }
+            )
         }
 
         composable(Screen.Settings.route) {
@@ -123,7 +139,70 @@ fun AppNavGraph(
                     navController.navigate(Screen.Login.route) {
                         popUpTo(navController.graph.id) { inclusive = true }
                     }
-                })
+                }
+            )
+        }
+
+        composable(Screen.Events.route) {
+            // TODO: implement me pls
+        }
+
+        composable(Screen.Census.route) { backStackEntry ->
+            val shouldRefresh by backStackEntry.savedStateHandle
+                .getStateFlow("census_refresh", false)
+                .collectAsState()
+
+            CensusListRoute(
+                getMeUseCase = container.getMeUseCase,
+                getHouseholdsUseCase = container.getHouseholdsUseCase,
+                deleteHouseholdUseCase = container.deleteHouseholdUseCase,
+                shouldRefresh = shouldRefresh,
+                onRefreshHandled = { backStackEntry.savedStateHandle["census_refresh"] = false },
+                onNavigateToCreate = { navController.navigate(Screen.CreateCensus.route) },
+                onNavigateToDetail = { id ->
+                    navController.navigate(
+                        Screen.CensusDetail.createRoute(
+                            id
+                        )
+                    )
+                },
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(Screen.CreateCensus.route) {
+            CreateCensusRoute(
+                createHouseholdUseCase = container.createHouseholdUseCase,
+                createPersonUseCase = container.createPersonUseCase,
+                suggestAddressUseCase = container.getAddressUseCase,
+                onBack = { navController.popBackStack() },
+                onCreated = {
+                    navController.previousBackStackEntry
+                        ?.savedStateHandle
+                        ?.set("census_refresh", true)
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        composable(
+            route = Screen.CensusDetail.route,
+            arguments = listOf(navArgument("householdId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val householdId =
+                backStackEntry.arguments?.getString("householdId") ?: return@composable
+            CensusDetailRoute(
+                householdId = householdId,
+                getHouseholdUseCase = container.getHouseholdUseCase,
+                getPersonsUseCase = container.getPersonsUseCase,
+                deletePersonUseCase = container.deletePersonUseCase,
+                createPersonUseCase = container.createPersonUseCase,
+                onBack = { navController.popBackStack() }
+            )
+        }
+
+        composable(Screen.Stats.route) {
+            // TODO: implement me pls
         }
     }
 }
