@@ -8,15 +8,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import org.censusmate.mobile.data.local.ThemeDataStore
-import org.censusmate.mobile.domain.usecase.auth.GetMeUseCase
-import org.censusmate.mobile.domain.usecase.auth.LoginUseCase
-import org.censusmate.mobile.domain.usecase.auth.LogoutUseCase
-import org.censusmate.mobile.domain.usecase.user.BlockUserUseCase
-import org.censusmate.mobile.domain.usecase.user.CreateUserUseCase
-import org.censusmate.mobile.domain.usecase.user.GetUserUseCase
-import org.censusmate.mobile.domain.usecase.user.GetUsersUseCase
-import org.censusmate.mobile.domain.usecase.user.UpdateUserUseCase
+import org.censusmate.mobile.di.AppContainer
 import org.censusmate.mobile.presentation.home.HomeRoute
 import org.censusmate.mobile.presentation.login.LoginRoute
 import org.censusmate.mobile.presentation.settings.SettingsRoute
@@ -41,35 +33,26 @@ sealed class Screen(val route: String) {
 
 @Composable
 fun AppNavGraph(
-    navController: NavHostController,
-    startDestination: String,
-    loginUseCase: LoginUseCase,
-    logoutUseCase: LogoutUseCase,
-    getMeUseCase: GetMeUseCase,
-    getUsersUseCase: GetUsersUseCase,
-    getUserUseCase: GetUserUseCase,
-    blockUserUseCase: BlockUserUseCase,
-    createUserUseCase: CreateUserUseCase,
-    updateUserUseCase: UpdateUserUseCase,
-    themeDataStore: ThemeDataStore,
+    navController: NavHostController, startDestination: String, container: AppContainer
 ) {
     NavHost(
         navController = navController, startDestination = startDestination
     ) {
         composable(Screen.Login.route) {
             LoginRoute(
-                loginUseCase = loginUseCase, getMeUseCase = getMeUseCase, onLoginSuccess = {
+                loginUseCase = container.loginUseCase,
+                getMeUseCase = container.getMeUseCase,
+                onLoginSuccess = {
                     navController.navigate(Screen.Home.route) {
                         popUpTo(navController.graph.id) { inclusive = true }
                     }
-                }
-            )
+                })
         }
 
         composable(Screen.Home.route) {
             HomeRoute(
-                getMeUseCase = getMeUseCase,
-                logoutUseCase = logoutUseCase,
+                getMeUseCase = container.getMeUseCase,
+                logoutUseCase = container.logoutUseCase,
                 onNavigateToUsers = { navController.navigate(Screen.Users.route) },
                 onNavigateToEvents = { navController.navigate(Screen.Events.route) },
                 onNavigateToHouseholds = { navController.navigate(Screen.Households.route) },
@@ -79,21 +62,23 @@ fun AppNavGraph(
         }
 
         composable(Screen.Users.route) { backStackEntry ->
-            val shouldRefresh by backStackEntry.savedStateHandle
-                .getStateFlow("users_refresh", false)
-                .collectAsState()
+            val shouldRefresh by backStackEntry.savedStateHandle.getStateFlow(
+                "users_refresh",
+                false
+            ).collectAsState()
 
             UsersRoute(
-                getUsersUseCase = getUsersUseCase,
-                blockUserUseCase = blockUserUseCase,
+                getUsersUseCase = container.getUsersUseCase,
+                blockUserUseCase = container.blockUserUseCase,
                 shouldRefresh = shouldRefresh,
                 onRefreshHandled = {
                     backStackEntry.savedStateHandle["users_refresh"] = false
                 },
                 onNavigateToCreate = { navController.navigate(Screen.CreateUser.route) },
-                onNavigateToEdit = { id -> navController.navigate(Screen.UpdateUser.createRoute(id)) },
-                onBack = { navController.popBackStack() }
-            )
+                onNavigateToEdit = { id ->
+                    navController.navigate(Screen.UpdateUser.createRoute(id))
+                },
+                onBack = { navController.popBackStack() })
         }
 
         composable(
@@ -103,43 +88,42 @@ fun AppNavGraph(
             val userId = backStackEntry.arguments?.getString("userId") ?: return@composable
             UpdateUserRoute(
                 userId = userId,
-                getUserUseCase = getUserUseCase,
-                updateUserUseCase = updateUserUseCase,
+                getUserUseCase = container.getUserUseCase,
+                updateUserUseCase = container.updateUserUseCase,
                 onBack = { navController.popBackStack() },
                 onUpdated = {
-                    navController.previousBackStackEntry
-                        ?.savedStateHandle
-                        ?.set("users_refresh", true)
+                    navController.previousBackStackEntry?.savedStateHandle?.set(
+                        "users_refresh",
+                        true
+                    )
                     navController.popBackStack()
-                }
-            )
+                })
         }
 
         composable(Screen.CreateUser.route) {
             CreateUserRoute(
-                createUserUseCase = createUserUseCase,
+                createUserUseCase = container.createUserUseCase,
                 onBack = { navController.popBackStack() },
                 onCreated = {
-                    navController.previousBackStackEntry
-                        ?.savedStateHandle
-                        ?.set("users_refresh", true)
+                    navController.previousBackStackEntry?.savedStateHandle?.set(
+                        "users_refresh",
+                        true
+                    )
                     navController.popBackStack()
-                }
-            )
+                })
         }
 
         composable(Screen.Settings.route) {
             SettingsRoute(
-                getMeUseCase = getMeUseCase,
-                logoutUseCase = logoutUseCase,
-                themeDataStore = themeDataStore,
+                getMeUseCase = container.getMeUseCase,
+                logoutUseCase = container.logoutUseCase,
+                themeDataStore = container.themeDataStore,
                 onBack = { navController.popBackStack() },
                 onLogout = {
                     navController.navigate(Screen.Login.route) {
                         popUpTo(navController.graph.id) { inclusive = true }
                     }
-                }
-            )
+                })
         }
     }
 }
