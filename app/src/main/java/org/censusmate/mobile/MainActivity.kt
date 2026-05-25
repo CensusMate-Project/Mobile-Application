@@ -23,6 +23,11 @@ import org.censusmate.mobile.data.repository.UserRepositoryImpl
 import org.censusmate.mobile.domain.usecase.auth.GetMeUseCase
 import org.censusmate.mobile.domain.usecase.auth.LoginUseCase
 import org.censusmate.mobile.domain.usecase.auth.LogoutUseCase
+import org.censusmate.mobile.domain.usecase.user.BlockUserUseCase
+import org.censusmate.mobile.domain.usecase.user.CreateUserUseCase
+import org.censusmate.mobile.domain.usecase.user.GetUserUseCase
+import org.censusmate.mobile.domain.usecase.user.GetUsersUseCase
+import org.censusmate.mobile.domain.usecase.user.UpdateUserUseCase
 import org.censusmate.mobile.navigation.AppNavGraph
 import org.censusmate.mobile.navigation.Screen
 import org.censusmate.mobile.ui.theme.MobileApplicationTheme
@@ -44,6 +49,12 @@ class MainActivity : ComponentActivity() {
     private val loginUseCase by lazy { LoginUseCase(authRepository) }
     private val logoutUseCase by lazy { LogoutUseCase(authRepository) }
     private val getMeUseCase by lazy { GetMeUseCase(authRepository) }
+
+    private val getUsersUseCase by lazy { GetUsersUseCase(userRepository) }
+    private val getUserUseCase by lazy { GetUserUseCase(userRepository) }
+    private val blockUserUseCase by lazy { BlockUserUseCase(userRepository) }
+    private val createUserUseCase by lazy { CreateUserUseCase(userRepository) }
+    private val updateUserUseCase by lazy { UpdateUserUseCase(userRepository) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +82,11 @@ class MainActivity : ComponentActivity() {
                     loginUseCase = loginUseCase,
                     logoutUseCase = logoutUseCase,
                     getMeUseCase = getMeUseCase,
+                    getUsersUseCase = getUsersUseCase,
+                    getUserUseCase = getUserUseCase,
+                    blockUserUseCase = blockUserUseCase,
+                    createUserUseCase = createUserUseCase,
+                    updateUserUseCase = updateUserUseCase,
                     themeDataStore = themeDataStore
                 )
             }
