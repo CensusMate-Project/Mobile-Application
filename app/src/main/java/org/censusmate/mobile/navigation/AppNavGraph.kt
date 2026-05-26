@@ -12,6 +12,9 @@ import org.censusmate.mobile.di.AppContainer
 import org.censusmate.mobile.presentation.census.CensusDetailRoute
 import org.censusmate.mobile.presentation.census.CensusListRoute
 import org.censusmate.mobile.presentation.census.CreateCensusRoute
+import org.censusmate.mobile.presentation.events.CreateEventRoute
+import org.censusmate.mobile.presentation.events.EventsRoute
+import org.censusmate.mobile.presentation.events.UpdateEventRoute
 import org.censusmate.mobile.presentation.home.HomeRoute
 import org.censusmate.mobile.presentation.login.LoginRoute
 import org.censusmate.mobile.presentation.settings.SettingsRoute
@@ -31,6 +34,10 @@ sealed class Screen(val route: String) {
     }
 
     object Events : Screen("events")
+    object CreateEvent : Screen("events/create")
+    object UpdateEvent : Screen("events/{eventId}") {
+        fun createRoute(id: String) = "events/$id"
+    }
 
     object Census : Screen("census")
     object CreateCensus : Screen("census/create")
@@ -143,8 +150,53 @@ fun AppNavGraph(
             )
         }
 
-        composable(Screen.Events.route) {
-            // TODO: implement me pls
+        composable(Screen.Events.route) { backStackEntry ->
+            val shouldRefresh by backStackEntry.savedStateHandle.getStateFlow(
+                    "events_refresh",
+                    false
+                ).collectAsState()
+
+            EventsRoute(
+                getMeUseCase = container.getMeUseCase,
+                getEventsUseCase = container.getEventsUseCase,
+                deleteEventUseCase = container.deleteEventUseCase,
+                shouldRefresh = shouldRefresh,
+                onRefreshHandled = { backStackEntry.savedStateHandle["events_refresh"] = false },
+                onNavigateToCreate = { navController.navigate(Screen.CreateEvent.route) },
+                onNavigateToEdit = { id -> navController.navigate(Screen.UpdateEvent.createRoute(id)) },
+                onBack = { navController.popBackStack() })
+        }
+
+        composable(Screen.CreateEvent.route) {
+            CreateEventRoute(
+                createEventUseCase = container.createEventUseCase,
+                onBack = { navController.popBackStack() },
+                onCreated = {
+                    navController.previousBackStackEntry?.savedStateHandle?.set(
+                            "events_refresh",
+                            true
+                        )
+                    navController.popBackStack()
+                })
+        }
+
+        composable(
+            route = Screen.UpdateEvent.route,
+            arguments = listOf(navArgument("eventId") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val eventId = backStackEntry.arguments?.getString("eventId") ?: return@composable
+            UpdateEventRoute(
+                eventId = eventId,
+                getEventUseCase = container.getEventUseCase,
+                updateEventUseCase = container.updateEventUseCase,
+                onBack = { navController.popBackStack() },
+                onUpdated = {
+                    navController.previousBackStackEntry?.savedStateHandle?.set(
+                            "events_refresh",
+                            true
+                        )
+                    navController.popBackStack()
+                })
         }
 
         composable(Screen.Census.route) { backStackEntry ->
