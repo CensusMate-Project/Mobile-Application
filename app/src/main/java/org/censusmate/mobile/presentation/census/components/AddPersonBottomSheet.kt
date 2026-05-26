@@ -28,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import org.censusmate.mobile.presentation.census.PersonForm
+import org.censusmate.mobile.ui.components.DatePickerField
 import org.censusmate.mobile.ui.components.SheetSectionLabel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -80,12 +81,11 @@ fun AddPersonBottomSheet(
                     label = { Text("Женский") })
             }
 
-            OutlinedTextField(
+            // Дата рождения
+            DatePickerField(
                 value = birthDate,
                 onValueChange = { birthDate = it },
-                label = { Text("Дата рождения * (ГГГГ-ММ-ДД)") },
-                placeholder = { Text("1990-01-15") },
-                singleLine = true,
+                label = "Дата рождения *",
                 modifier = Modifier.fillMaxWidth()
             )
 
