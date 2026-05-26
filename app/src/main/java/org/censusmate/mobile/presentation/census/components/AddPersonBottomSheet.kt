@@ -1,4 +1,4 @@
-package org.censusmate.mobile.presentation.census
+package org.censusmate.mobile.presentation.census.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,6 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import org.censusmate.mobile.presentation.census.PersonForm
 import org.censusmate.mobile.ui.components.SheetSectionLabel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -234,22 +235,23 @@ fun AddPersonBottomSheet(
                 onClick = {
                     onConfirm(
                         PersonForm(
-                        gender = gender.ifBlank { null },
-                        birthDate = birthDate,
-                        citizenship = citizenship.ifBlank { null },
-                        hasDualCitizenship = hasDualCitizenship,
-                        nationality = nationality.ifBlank { null },
-                        nativeLanguage = nativeLanguage.ifBlank { null },
-                        speaksRussian = speaksRussian,
-                        otherLanguages = otherLanguages.split(",").map { it.trim() }
-                            .filter { it.isNotBlank() },
-                        educationLevel = educationLevel.ifBlank { null },
-                        maritalStatus = maritalStatus.ifBlank { null },
-                        childrenCount = childrenCount.toIntOrNull(),
-                        relationToHousehold = relationToHousehold.ifBlank { null },
-                        placeOfBirth = placeOfBirth.ifBlank { null },
-                        currentResidence = currentResidence.ifBlank { null },
-                        employmentStatus = employmentStatus.ifBlank { null }))
+                            gender = gender.ifBlank { null },
+                            birthDate = birthDate,
+                            citizenship = citizenship.ifBlank { null },
+                            hasDualCitizenship = hasDualCitizenship,
+                            nationality = nationality.ifBlank { null },
+                            nativeLanguage = nativeLanguage.ifBlank { null },
+                            speaksRussian = speaksRussian,
+                            otherLanguages = otherLanguages.split(",").map { it.trim() }
+                                .filter { it.isNotBlank() },
+                            educationLevel = educationLevel.ifBlank { null },
+                            maritalStatus = maritalStatus.ifBlank { null },
+                            childrenCount = childrenCount.toIntOrNull(),
+                            relationToHousehold = relationToHousehold.ifBlank { null },
+                            placeOfBirth = placeOfBirth.ifBlank { null },
+                            currentResidence = currentResidence.ifBlank { null },
+                            employmentStatus = employmentStatus.ifBlank { null })
+                    )
                 },
                 modifier = Modifier
                     .fillMaxWidth()
