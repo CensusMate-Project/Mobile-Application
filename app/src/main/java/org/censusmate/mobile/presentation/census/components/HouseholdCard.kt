@@ -1,4 +1,4 @@
-package org.censusmate.mobile.presentation.census.elements
+package org.censusmate.mobile.presentation.census.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -30,6 +30,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import org.censusmate.mobile.domain.model.Household
+import org.censusmate.mobile.ui.components.InfoChip
 
 @Composable
 fun HouseholdCard(

@@ -1,4 +1,4 @@
-package org.censusmate.mobile.presentation.census.elements
+package org.censusmate.mobile.presentation.census.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable

@@ -47,9 +47,9 @@ import org.censusmate.mobile.domain.repository.AddressRepository
 import org.censusmate.mobile.domain.usecase.address.SuggestAddressUseCase
 import org.censusmate.mobile.domain.usecase.household.CreateHouseholdUseCase
 import org.censusmate.mobile.domain.usecase.person.CreatePersonUseCase
-import org.censusmate.mobile.presentation.census.elements.AddressField
-import org.censusmate.mobile.presentation.census.elements.PersonFormCard
-import org.censusmate.mobile.presentation.census.elements.SectionTitle
+import org.censusmate.mobile.presentation.census.components.AddressField
+import org.censusmate.mobile.presentation.census.components.PersonFormCard
+import org.censusmate.mobile.ui.components.SectionTitle
 import org.censusmate.mobile.ui.theme.MobileApplicationTheme
 import kotlin.collections.emptyList
 

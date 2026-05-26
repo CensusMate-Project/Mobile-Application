@@ -1,4 +1,4 @@
-package org.censusmate.mobile.presentation.users
+package org.censusmate.mobile.presentation.users.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

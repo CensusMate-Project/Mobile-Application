@@ -1,4 +1,4 @@
-package org.censusmate.mobile.presentation.home
+package org.censusmate.mobile.presentation.home.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

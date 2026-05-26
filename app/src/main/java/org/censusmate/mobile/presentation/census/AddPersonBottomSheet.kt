@@ -27,7 +27,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import org.censusmate.mobile.presentation.census.elements.SheetSectionLabel
+import org.censusmate.mobile.ui.components.SheetSectionLabel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

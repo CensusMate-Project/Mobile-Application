@@ -1,4 +1,4 @@
-package org.censusmate.mobile.presentation.census.elements
+package org.censusmate.mobile.ui.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row

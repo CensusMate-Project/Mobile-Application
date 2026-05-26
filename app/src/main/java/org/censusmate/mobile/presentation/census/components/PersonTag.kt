@@ -1,4 +1,4 @@
-package org.censusmate.mobile.presentation.census.elements
+package org.censusmate.mobile.presentation.census.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme

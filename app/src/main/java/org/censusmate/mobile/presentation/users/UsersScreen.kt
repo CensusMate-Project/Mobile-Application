@@ -36,6 +36,7 @@ import org.censusmate.mobile.domain.model.Role
 import org.censusmate.mobile.domain.model.User
 import org.censusmate.mobile.domain.usecase.user.BlockUserUseCase
 import org.censusmate.mobile.domain.usecase.user.GetUsersUseCase
+import org.censusmate.mobile.presentation.users.components.UserCard
 import org.censusmate.mobile.ui.theme.MobileApplicationTheme
 
 @Composable

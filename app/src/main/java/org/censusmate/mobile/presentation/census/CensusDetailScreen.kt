@@ -49,8 +49,8 @@ import org.censusmate.mobile.domain.usecase.household.GetHouseholdUseCase
 import org.censusmate.mobile.domain.usecase.person.CreatePersonUseCase
 import org.censusmate.mobile.domain.usecase.person.DeletePersonUseCase
 import org.censusmate.mobile.domain.usecase.person.GetPersonsUseCase
-import org.censusmate.mobile.presentation.census.elements.HouseholdInfoCard
-import org.censusmate.mobile.presentation.census.elements.PersonCard
+import org.censusmate.mobile.presentation.census.components.HouseholdInfoCard
+import org.censusmate.mobile.presentation.census.components.PersonCard
 
 @Composable
 fun CensusDetailRoute(

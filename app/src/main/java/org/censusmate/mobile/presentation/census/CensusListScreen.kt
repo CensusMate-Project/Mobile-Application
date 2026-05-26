@@ -45,7 +45,7 @@ import org.censusmate.mobile.domain.model.Household
 import org.censusmate.mobile.domain.usecase.auth.GetMeUseCase
 import org.censusmate.mobile.domain.usecase.household.DeleteHouseholdUseCase
 import org.censusmate.mobile.domain.usecase.household.GetHouseholdsUseCase
-import org.censusmate.mobile.presentation.census.elements.HouseholdCard
+import org.censusmate.mobile.presentation.census.components.HouseholdCard
 import org.censusmate.mobile.ui.theme.MobileApplicationTheme
 
 @Composable

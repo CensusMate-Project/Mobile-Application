@@ -41,6 +41,7 @@ import org.censusmate.mobile.domain.model.AuthUser
 import org.censusmate.mobile.domain.model.Role
 import org.censusmate.mobile.domain.usecase.auth.GetMeUseCase
 import org.censusmate.mobile.domain.usecase.auth.LogoutUseCase
+import org.censusmate.mobile.presentation.home.components.HomeNavCard
 import org.censusmate.mobile.ui.theme.MobileApplicationTheme
 
 @Composable
