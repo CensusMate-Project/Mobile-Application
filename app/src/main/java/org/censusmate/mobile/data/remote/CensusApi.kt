@@ -1,6 +1,8 @@
 package org.censusmate.mobile.data.remote
 
 import io.ktor.client.*
+import io.ktor.client.plugins.ClientRequestException
+import io.ktor.client.plugins.HttpResponseValidator
 import io.ktor.client.plugins.auth.Auth
 import io.ktor.client.plugins.auth.providers.BearerTokens
 import io.ktor.client.plugins.auth.providers.bearer
@@ -42,6 +44,16 @@ class CensusApi(tokenDataStore: TokenDataStore) {
             level = LogLevel.BODY
         }
         expectSuccess = true
+
+        HttpResponseValidator {
+            handleResponseExceptionWithRequest { exception, _ ->
+                if (exception is ClientRequestException &&
+                    exception.response.status.value == 401
+                ) {
+                    tokenDataStore.clear()
+                }
+            }
+        }
     }
 
     private val baseUrl = "http://10.0.2.2:3000"

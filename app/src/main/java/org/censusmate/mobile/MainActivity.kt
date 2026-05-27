@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.navigation.compose.rememberNavController
@@ -21,6 +22,7 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
         val startDestination = runBlocking {
             if (container.tokenDataStore.get() != null) Screen.Home.route
             else Screen.Login.route
@@ -38,6 +40,20 @@ class MainActivity : ComponentActivity() {
 
             MobileApplicationTheme(darkTheme = darkTheme) {
                 val navController = rememberNavController()
+
+                val token by container.tokenDataStore.tokenFlow
+                    .collectAsState(initial = runBlocking { container.tokenDataStore.get() })
+
+                LaunchedEffect(token) {
+                    if (token == null &&
+                        navController.currentDestination?.route != Screen.Login.route
+                    ) {
+                        navController.navigate(Screen.Login.route) {
+                            popUpTo(navController.graph.id) { inclusive = true }
+                        }
+                    }
+                }
+
                 AppNavGraph(
                     navController = navController,
                     startDestination = startDestination,

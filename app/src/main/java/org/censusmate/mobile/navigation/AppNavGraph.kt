@@ -18,6 +18,7 @@ import org.censusmate.mobile.presentation.events.UpdateEventRoute
 import org.censusmate.mobile.presentation.home.HomeRoute
 import org.censusmate.mobile.presentation.login.LoginRoute
 import org.censusmate.mobile.presentation.settings.SettingsRoute
+import org.censusmate.mobile.presentation.stats.StatsRoute
 import org.censusmate.mobile.presentation.users.CreateUserRoute
 import org.censusmate.mobile.presentation.users.UpdateUserRoute
 import org.censusmate.mobile.presentation.users.UsersRoute
@@ -254,7 +255,11 @@ fun AppNavGraph(
         }
 
         composable(Screen.Stats.route) {
-            // TODO: implement me pls
+            StatsRoute(
+                getEventsUseCase = container.getEventsUseCase,
+                getStatsUseCase = container.getStatsUseCase,
+                onBack = { navController.popBackStack() }
+            )
         }
     }
 }
