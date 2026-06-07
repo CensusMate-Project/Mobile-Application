@@ -5,4 +5,18 @@
     <string name="email">Email</string>
     <string name="password">Пароль</string>
     <string name="login">Войти</string>
+    <string name="settings">Настройки</string>
+    <string name="profile">Профиль</string>
+    <string name="administrator_role">Администратор</string>
+    <string name="agent_role">Переписчик</string>
+    <string name="decoration">Оформление</string>
+    <string name="application_theme">Тема приложения</string>
+    <string name="system_theme">Системная</string>
+    <string name="light_theme">Светлая</string>
+    <string name="dark_theme">Тёмная</string>
+    <string name="logout_from_account">Выйти из аккаунта</string>
+    <string name="exit_from_account">Выход из аккаунта</string>
+    <string name="confirme_logout">Вы уверены, что хотите выйти?</string>
+    <string name="logout">Выйти</string>
+    <string name="cancel">Отмена</string>
 </resources>
