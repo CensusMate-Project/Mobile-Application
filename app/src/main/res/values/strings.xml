@@ -135,4 +135,23 @@
     <string name="employment_status_section">Статус занятости</string>
     <string name="other">Другое</string>
     <string name="add">Добавить</string>
+    <string name="refresh">Обновить</string>
+    <string name="press_plus_to_add">Нажмите + чтобы добавить</string>
+    <string name="create">Создать</string>
+    <string name="residents_section">Жители (%d)</string>
+    <string name="household">Домохозяйство</string>
+    <string name="no_households">Нет домохозяйств</string>
+    <string name="delete_household_title">Удалить домохозяйство?</string>
+    <string name="delete_household_confirmation">Домохозяйство по адресу «%s» и все его жители будут удалены.</string>
+    <string name="new_household">Новое домохозяйство</string>
+    <string name="address_section">Адрес</string>
+    <string name="total_residents_label">Количество жителей *</string>
+    <string name="dwelling_type_field">Тип жилья</string>
+    <string name="building_year_field">Год постройки</string>
+    <string name="total_area_field">Общая пл. (м²)</string>
+    <string name="living_area_field">Жилая пл. (м²)</string>
+    <string name="notes">Примечания</string>
+    <string name="no_residents">Нет жителей</string>
+    <string name="delete_person_title">Удалить жителя?</string>
+    <string name="delete_person_confirmation">Житель будет удалён без возможности восстановления.</string>
 </resources>
