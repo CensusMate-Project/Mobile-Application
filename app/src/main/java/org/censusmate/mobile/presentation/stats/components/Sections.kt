@@ -37,7 +37,7 @@ fun OverviewSection(stats: Stats) {
                 modifier = Modifier.weight(1f)
             )
             StatCard(
-                label = stringResource(R.string.households),
+                label = stringResource(R.string.households_genitive),
                 value = stats.totalHouseholds.toString(),
                 icon = Icons.Default.Home,
                 modifier = Modifier.weight(1f)

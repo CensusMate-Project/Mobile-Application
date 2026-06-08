@@ -33,10 +33,12 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import org.censusmate.mobile.R
 import org.censusmate.mobile.domain.model.AuthUser
 import org.censusmate.mobile.domain.model.Role
 import org.censusmate.mobile.domain.usecase.auth.GetMeUseCase
@@ -80,7 +82,7 @@ fun HomeScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("CensusMate") },
+                title = { Text(stringResource(R.string.censusmate)) },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
                     titleContentColor = MaterialTheme.colorScheme.onPrimary,
@@ -133,7 +135,7 @@ fun HomeScreen(
                     ) {
                         Column(modifier = Modifier.padding(16.dp)) {
                             Text(
-                                text = "Добро пожаловать,",
+                                text = stringResource(R.string.welcome),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onPrimaryContainer
                             )
@@ -147,7 +149,10 @@ fun HomeScreen(
                             AssistChip(
                                 onClick = {},
                                 label = {
-                                    Text(if (user.isAdmin) "Администратор" else "Переписчик")
+                                    Text(if (user.isAdmin)
+                                        stringResource(R.string.administrator_role)
+                                    else
+                                        stringResource(R.string.agent_role))
                                 },
                                 leadingIcon = {
                                     Icon(
@@ -164,7 +169,7 @@ fun HomeScreen(
                     }
 
                     Text(
-                        text = "Разделы",
+                        text = stringResource(R.string.sections),
                         style = MaterialTheme.typography.titleMedium,
                         fontWeight = FontWeight.SemiBold
                     )
@@ -172,36 +177,42 @@ fun HomeScreen(
                     // Navigation cards
                     if (user.isAdmin) {
                         HomeNavCard(
-                            title = "Пользователи",
-                            subtitle = "Управление учётными записями",
+                            title = stringResource(R.string.users),
+                            subtitle = stringResource(R.string.account_management),
                             icon = Icons.Default.Group,
                             onClick = onNavigateToUsers
                         )
                         HomeNavCard(
-                            title = "Статистика",
-                            subtitle = "Аналитика по переписи",
+                            title = stringResource(R.string.statistics),
+                            subtitle = stringResource(R.string.census_analytics),
                             icon = Icons.Default.BarChart,
                             onClick = onNavigateToStats
                         )
                     }
 
                     HomeNavCard(
-                        title = "События переписи",
-                        subtitle = if (user.isAdmin) "Управление событиями" else "Активные события",
+                        title = stringResource(R.string.census_events),
+                        subtitle = if (user.isAdmin)
+                            stringResource(R.string.event_management)
+                        else
+                            stringResource(R.string.active_events),
                         icon = Icons.Default.Event,
                         onClick = onNavigateToEvents
                     )
 
                     HomeNavCard(
-                        title = "Домохозяйства",
-                        subtitle = if (user.isAdmin) "Все домохозяйства" else "Домохозяйства",
+                        title = stringResource(R.string.households),
+                        subtitle = if (user.isAdmin)
+                            stringResource(R.string.all_households)
+                        else
+                            stringResource(R.string.households_genitive),
                         icon = Icons.Default.Home,
                         onClick = onNavigateToHouseholds
                     )
 
                     HomeNavCard(
-                        title = "Настройки",
-                        subtitle = "Тема, профиль, выход",
+                        title = stringResource(R.string.settings),
+                        subtitle = stringResource(R.string.theme_profile_exit),
                         icon = Icons.Default.Settings,
                         onClick = onNavigateToSettings
                     )

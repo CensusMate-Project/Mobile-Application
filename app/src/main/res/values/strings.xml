@@ -24,7 +24,8 @@
     <string name="actively">Активно</string>
     <string name="general_information">Общая информация</string>
     <string name="residents">Жителей</string>
-    <string name="households">Домохозяйств</string>
+    <string name="households_genitive">Домохозяйств</string>
+    <string name="households">Домохозяйства</string>
     <string name="average_per_house">Среднее на дом</string>
     <string name="average_age">Средний возраст</string>
     <string name="children_under_15">Детей (до 15)</string>
@@ -76,4 +77,13 @@
     <string name="load_more">Загрузить ещё</string>
     <string name="choose">Выбрать</string>
     <string name="сhoose_time">Выберите время</string>
+    <string name="welcome">Добро пожаловать</string>
+    <string name="sections">Разделы</string>
+    <string name="account_management">Управление учётными записями</string>
+    <string name="census_analytics">Аналитика по переписи</string>
+    <string name="census_events">События переписи</string>
+    <string name="event_management">Управление событиями</string>
+    <string name="active_events">Активные события</string>
+    <string name="all_households">Все домохозяйства</string>
+    <string name="theme_profile_exit">Тема, профиль, выход</string>
 </resources>
