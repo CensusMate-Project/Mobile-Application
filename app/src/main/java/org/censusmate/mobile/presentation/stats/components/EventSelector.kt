@@ -19,7 +19,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import org.censusmate.mobile.R
 import org.censusmate.mobile.domain.model.Event
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,10 +38,10 @@ fun EventSelector(
         onExpandedChange = { expanded = it }
     ) {
         OutlinedTextField(
-            value = selectedEvent?.name ?: "Выберите событие",
+            value = selectedEvent?.name ?: stringResource(R.string.select_event),
             onValueChange = {},
             readOnly = true,
-            label = { Text("Событие переписи") },
+            label = { Text(stringResource(R.string.census_event)) },
             trailingIcon = { ExposedDropdownMenuDefaults.TrailingIcon(expanded = expanded) },
             modifier = Modifier
                 .fillMaxWidth()
@@ -63,7 +65,7 @@ fun EventSelector(
                                     color = MaterialTheme.colorScheme.primaryContainer
                                 ) {
                                     Text(
-                                        text = "Активно",
+                                        text = stringResource(R.string.actively),
                                         style = MaterialTheme.typography.labelSmall,
                                         color = MaterialTheme.colorScheme.primary,
                                         modifier = Modifier.padding(
