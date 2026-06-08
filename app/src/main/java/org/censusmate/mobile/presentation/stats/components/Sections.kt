@@ -197,13 +197,13 @@ fun HousingSection(stats: Stats) {
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             StatCard(
                 label = stringResource(R.string.wed_general_square),
-                value = "%.1f m²".format(stats.avgTotalArea),
+                value = stringResource(R.string.area_m2, "%.1f".format(stats.avgTotalArea)),
                 icon = Icons.Default.SquareFoot,
                 modifier = Modifier.weight(1f)
             )
             StatCard(
                 label = stringResource(R.string.wed_residential_area),
-                value = "%.1f m²".format(stats.avgLivingArea),
+                value = stringResource(R.string.area_m2, "%.1f".format(stats.avgLivingArea)),
                 icon = Icons.Default.SquareFoot,
                 modifier = Modifier.weight(1f)
             )
