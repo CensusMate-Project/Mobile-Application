@@ -31,9 +31,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import org.censusmate.mobile.R
 import org.censusmate.mobile.domain.model.Event
 import org.censusmate.mobile.domain.usecase.event.GetEventUseCase
 import org.censusmate.mobile.domain.usecase.event.UpdateEventUseCase
@@ -89,7 +91,7 @@ fun UpdateEventScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Редактировать событие") }, navigationIcon = {
+                title = { Text(stringResource(R.string.edit_event)) }, navigationIcon = {
                 IconButton(onClick = onBack) {
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
                 }
@@ -131,7 +133,7 @@ fun UpdateEventScreen(
                     OutlinedTextField(
                         value = name,
                         onValueChange = { name = it },
-                        label = { Text("Название события *") },
+                        label = { Text(stringResource(R.string.event_name)) },
                         leadingIcon = { Icon(Icons.Default.Event, null) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth()
@@ -140,14 +142,14 @@ fun UpdateEventScreen(
                     DateTimePickerField(
                         value = startDatetime,
                         onValueChange = { startDatetime = it },
-                        label = "Дата и время начала *",
+                        label = stringResource(R.string.start_datetime),
                         modifier = Modifier.fillMaxWidth()
                     )
 
                     DateTimePickerField(
                         value = endDatetime,
                         onValueChange = { endDatetime = it },
-                        label = "Дата и время окончания *",
+                        label = stringResource(R.string.end_datetime),
                         modifier = Modifier.fillMaxWidth()
                     )
 
@@ -157,7 +159,7 @@ fun UpdateEventScreen(
                             .fillMaxWidth()
                             .height(52.dp)
                     ) {
-                        Text("Сохранить", style = MaterialTheme.typography.titleMedium)
+                        Text(stringResource(R.string.save), style = MaterialTheme.typography.titleMedium)
                     }
                 }
             }
@@ -167,7 +169,7 @@ fun UpdateEventScreen(
 
 private val updateEventState = UpdateEventViewModel.State.Success(
     Event(
-        "1", "Перепись 2025",
+        "1", "Перепись 2026",
         "2026-01-01T00:00:00", "2026-12-31T23:59:59",
         true, "2026-01-01", null
     )

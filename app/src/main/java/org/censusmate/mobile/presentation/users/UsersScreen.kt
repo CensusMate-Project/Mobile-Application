@@ -29,9 +29,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import org.censusmate.mobile.R
 import org.censusmate.mobile.domain.model.Role
 import org.censusmate.mobile.domain.model.User
 import org.censusmate.mobile.domain.usecase.user.BlockUserUseCase
@@ -84,7 +86,7 @@ fun UsersScreen(
 ) {
     Scaffold(topBar = {
         TopAppBar(
-            title = { Text("Пользователи") }, navigationIcon = {
+            title = { Text(stringResource(R.string.users)) }, navigationIcon = {
                 IconButton(onClick = onBack) {
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
                 }
@@ -101,7 +103,7 @@ fun UsersScreen(
         )
     }, floatingActionButton = {
         FloatingActionButton(onClick = onNavigateToCreate) {
-            Icon(Icons.Default.PersonAdd, contentDescription = "Добавить пользователя")
+            Icon(Icons.Default.PersonAdd, contentDescription = stringResource(R.string.add_user))
         }
     }) { padding ->
         when (state) {
@@ -126,7 +128,7 @@ fun UsersScreen(
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         Text(state.message, color = MaterialTheme.colorScheme.error)
-                        Button(onClick = onRefresh) { Text("Повторить") }
+                        Button(onClick = onRefresh) { Text(stringResource(R.string.repeat)) }
                     }
                 }
             }
@@ -156,7 +158,7 @@ fun UsersScreen(
                                 contentAlignment = Alignment.Center
                             ) {
                                 TextButton(onClick = onLoadNextPage) {
-                                    Text("Загрузить ещё")
+                                    Text(stringResource(R.string.load_more))
                                 }
                             }
                         }

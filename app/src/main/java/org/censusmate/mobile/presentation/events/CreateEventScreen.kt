@@ -33,9 +33,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import org.censusmate.mobile.R
 import org.censusmate.mobile.domain.usecase.event.CreateEventUseCase
 import org.censusmate.mobile.ui.components.DateTimePickerField
 import org.censusmate.mobile.ui.theme.MobileApplicationTheme
@@ -75,7 +77,7 @@ fun CreateEventScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Новое событие") }, navigationIcon = {
+                title = { Text(stringResource(R.string.new_event)) }, navigationIcon = {
                 IconButton(onClick = onBack) {
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
                 }
@@ -97,7 +99,7 @@ fun CreateEventScreen(
             OutlinedTextField(
                 value = name,
                 onValueChange = { name = it },
-                label = { Text("Название события *") },
+                label = { Text(stringResource(R.string.event_name)) },
                 leadingIcon = { Icon(Icons.Default.Event, null) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
@@ -107,7 +109,7 @@ fun CreateEventScreen(
             DateTimePickerField(
                 value = startDatetime,
                 onValueChange = { startDatetime = it },
-                label = "Дата и время начала *",
+                label = stringResource(R.string.event_start_datetime),
                 modifier = Modifier.fillMaxWidth(),
                 enabled = state !is CreateEventViewModel.State.Loading
             )
@@ -115,7 +117,7 @@ fun CreateEventScreen(
             DateTimePickerField(
                 value = endDatetime,
                 onValueChange = { endDatetime = it },
-                label = "Дата и время окончания *",
+                label = stringResource(R.string.event_end_datetime),
                 modifier = Modifier.fillMaxWidth(),
                 enabled = state !is CreateEventViewModel.State.Loading
             )
@@ -150,7 +152,7 @@ fun CreateEventScreen(
                         strokeWidth = 2.dp
                     )
                 } else {
-                    Text("Создать событие", style = MaterialTheme.typography.titleMedium)
+                    Text(stringResource(R.string.create_event), style = MaterialTheme.typography.titleMedium)
                 }
             }
         }

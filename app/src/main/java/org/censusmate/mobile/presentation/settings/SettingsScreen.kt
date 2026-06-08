@@ -45,11 +45,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import org.censusmate.mobile.R
 import org.censusmate.mobile.data.local.Theme
 import org.censusmate.mobile.data.local.ThemeDataStore
 import org.censusmate.mobile.domain.model.AuthUser
@@ -139,7 +141,7 @@ fun SettingsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Настройки") },
+                title = { Text(stringResource(R.string.settings)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Назад")
@@ -179,7 +181,7 @@ fun SettingsScreen(
                     ) {
                         // Profile
                         Text(
-                            text = "Профиль",
+                            text = stringResource(R.string.profile),
                             style = MaterialTheme.typography.labelLarge,
                             color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.SemiBold
@@ -210,7 +212,10 @@ fun SettingsScreen(
                                         color = MaterialTheme.colorScheme.onSurfaceVariant
                                     )
                                     Text(
-                                        text = if (state.user.isAdmin) "Администратор" else "Переписчик",
+                                        text = if (state.user.isAdmin)
+                                            stringResource(R.string.administrator_role)
+                                        else
+                                            stringResource(R.string.agent_role),
                                         style = MaterialTheme.typography.bodySmall,
                                         color = MaterialTheme.colorScheme.primary
                                     )
@@ -220,7 +225,7 @@ fun SettingsScreen(
 
                         // Theme
                         Text(
-                            text = "Оформление",
+                            text = stringResource(R.string.decoration),
                             style = MaterialTheme.typography.labelLarge,
                             color = MaterialTheme.colorScheme.primary,
                             fontWeight = FontWeight.SemiBold
@@ -230,7 +235,7 @@ fun SettingsScreen(
                         Card(modifier = Modifier.fillMaxWidth()) {
                             Column(modifier = Modifier.padding(16.dp)) {
                                 Text(
-                                    text = "Тема приложения",
+                                    text = stringResource(R.string.application_theme),
                                     style = MaterialTheme.typography.titleSmall
                                 )
                                 Spacer(modifier = Modifier.height(8.dp))
@@ -239,21 +244,21 @@ fun SettingsScreen(
                                     horizontalArrangement = Arrangement.spacedBy(8.dp)
                                 ) {
                                     ThemeChip(
-                                        label = "Системная",
+                                        label = stringResource(R.string.system_theme),
                                         icon = Icons.Default.SettingsBrightness,
                                         selected = state.theme == Theme.SYSTEM,
                                         onClick = { onTheme(Theme.SYSTEM) },
                                         modifier = Modifier.weight(1f)
                                     )
                                     ThemeChip(
-                                        label = "Светлая",
+                                        label = stringResource(R.string.light_theme),
                                         icon = Icons.Default.LightMode,
                                         selected = state.theme == Theme.LIGHT,
                                         onClick = { onTheme(Theme.LIGHT) },
                                         modifier = Modifier.weight(1f)
                                     )
                                     ThemeChip(
-                                        label = "Тёмная",
+                                        label = stringResource(R.string.dark_theme),
                                         icon = Icons.Default.DarkMode,
                                         selected = state.theme == Theme.DARK,
                                         onClick = { onTheme(Theme.DARK) },
@@ -283,7 +288,7 @@ fun SettingsScreen(
                             modifier = Modifier.size(18.dp)
                         )
                         Spacer(modifier = Modifier.width(8.dp))
-                        Text("Выйти из аккаунта")
+                        Text(stringResource(R.string.logout_from_account))
                     }
 
                     if (showLogoutDialog) {
@@ -296,8 +301,8 @@ fun SettingsScreen(
                                     tint = MaterialTheme.colorScheme.error
                                 )
                             },
-                            title = { Text("Выход из аккаунта") },
-                            text = { Text("Вы уверены, что хотите выйти?") },
+                            title = { Text(stringResource(R.string.exit_from_account)) },
+                            text = { Text(stringResource(R.string.confirm_logout)) },
                             confirmButton = {
                                 Button(
                                     onClick = {
@@ -308,12 +313,12 @@ fun SettingsScreen(
                                         containerColor = MaterialTheme.colorScheme.error
                                     )
                                 ) {
-                                    Text("Выйти")
+                                    Text(stringResource(R.string.logout))
                                 }
                             },
                             dismissButton = {
                                 TextButton(onClick = { showLogoutDialog = false }) {
-                                    Text("Отмена")
+                                    Text(stringResource(R.string.cancel))
                                 }
                             }
                         )

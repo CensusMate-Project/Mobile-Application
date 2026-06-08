@@ -29,6 +29,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import org.censusmate.mobile.R
 import org.censusmate.mobile.domain.model.Household
 import org.censusmate.mobile.ui.components.InfoChip
 
@@ -76,7 +78,7 @@ fun HouseholdCard(
                 Spacer(Modifier.height(4.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     InfoChip(
-                        icon = Icons.Default.People, label = "${household.totalResidents} чел."
+                        icon = Icons.Default.People, label = stringResource(R.string.residents_count, household.totalResidents)
                     )
                     household.dwellingType?.let {
                         InfoChip(
@@ -85,7 +87,7 @@ fun HouseholdCard(
                     }
                     household.roomsCount?.let {
                         InfoChip(
-                            icon = Icons.Default.MeetingRoom, label = "$it комн."
+                            icon = Icons.Default.MeetingRoom, label = stringResource(R.string.rooms_count, it)
                         )
                     }
                 }
@@ -97,7 +99,7 @@ fun HouseholdCard(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Delete,
-                        contentDescription = "Удалить",
+                        contentDescription = stringResource(R.string.delete),
                         tint = MaterialTheme.colorScheme.error,
                         modifier = Modifier.size(20.dp)
                     )

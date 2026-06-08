@@ -38,10 +38,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import org.censusmate.mobile.R
 import org.censusmate.mobile.domain.model.Address
 import org.censusmate.mobile.domain.repository.AddressRepository
 import org.censusmate.mobile.domain.usecase.address.SuggestAddressUseCase
@@ -106,7 +108,7 @@ fun CreateCensusScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Новое домохозяйство") },
+                title = { Text(stringResource(R.string.new_household)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
@@ -130,7 +132,7 @@ fun CreateCensusScreen(
         ) {
 
             // Address
-            SectionTitle("Адрес")
+            SectionTitle(stringResource(R.string.address_section))
 
             AddressField(
                 value = address,
@@ -139,12 +141,12 @@ fun CreateCensusScreen(
             )
 
             // Household
-            SectionTitle("Жильё")
+            SectionTitle(stringResource(R.string.housing))
 
             OutlinedTextField(
                 value = totalResidents,
                 onValueChange = { totalResidents = it },
-                label = { Text("Количество жителей *") },
+                label = { Text(stringResource(R.string.total_residents_label)) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth()
@@ -154,14 +156,14 @@ fun CreateCensusScreen(
                 OutlinedTextField(
                     value = dwellingType,
                     onValueChange = { dwellingType = it },
-                    label = { Text("Тип жилья") },
+                    label = { Text(stringResource(R.string.dwelling_type_field)) },
                     singleLine = true,
                     modifier = Modifier.weight(1f)
                 )
                 OutlinedTextField(
                     value = buildingYear,
                     onValueChange = { buildingYear = it },
-                    label = { Text("Год постройки") },
+                    label = { Text(stringResource(R.string.building_year_field)) },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     singleLine = true,
                     modifier = Modifier.weight(1f)
@@ -172,7 +174,7 @@ fun CreateCensusScreen(
                 OutlinedTextField(
                     value = totalArea,
                     onValueChange = { totalArea = it },
-                    label = { Text("Общая пл. (м²)") },
+                    label = { Text(stringResource(R.string.total_area_field)) },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     singleLine = true,
                     modifier = Modifier.weight(1f)
@@ -180,7 +182,7 @@ fun CreateCensusScreen(
                 OutlinedTextField(
                     value = livingArea,
                     onValueChange = { livingArea = it },
-                    label = { Text("Жилая пл. (м²)") },
+                    label = { Text(stringResource(R.string.living_area_field)) },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     singleLine = true,
                     modifier = Modifier.weight(1f)
@@ -188,7 +190,7 @@ fun CreateCensusScreen(
                 OutlinedTextField(
                     value = roomsCount,
                     onValueChange = { roomsCount = it },
-                    label = { Text("Комнат") },
+                    label = { Text(stringResource(R.string.rooms_count_label)) },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     singleLine = true,
                     modifier = Modifier.weight(1f)
@@ -198,13 +200,13 @@ fun CreateCensusScreen(
             OutlinedTextField(
                 value = notes,
                 onValueChange = { notes = it },
-                label = { Text("Примечания") },
+                label = { Text(stringResource(R.string.notes)) },
                 minLines = 2,
                 modifier = Modifier.fillMaxWidth()
             )
 
             // Persons
-            SectionTitle("Жители (${persons.size})")
+            SectionTitle(stringResource(R.string.residents_section, persons.size))
 
             persons.forEachIndexed { index, person ->
                 PersonFormCard(
@@ -219,7 +221,7 @@ fun CreateCensusScreen(
             ) {
                 Icon(Icons.Default.PersonAdd, null)
                 Spacer(Modifier.width(8.dp))
-                Text("Добавить жителя")
+                Text(stringResource(R.string.add_resident))
             }
 
             // Error
@@ -266,7 +268,7 @@ fun CreateCensusScreen(
                         strokeWidth = 2.dp
                     )
                 } else {
-                    Text("Создать", style = MaterialTheme.typography.titleMedium)
+                    Text(stringResource(R.string.create), style = MaterialTheme.typography.titleMedium)
                 }
             }
         }
