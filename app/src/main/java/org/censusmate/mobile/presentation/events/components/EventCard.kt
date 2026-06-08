@@ -27,8 +27,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import org.censusmate.mobile.R
 import org.censusmate.mobile.domain.model.Event
 
 @Composable
@@ -83,7 +85,7 @@ fun EventCard(
                             color = MaterialTheme.colorScheme.primaryContainer
                         ) {
                             Text(
-                                text = "Активно",
+                                text = stringResource(R.string.actively),
                                 style = MaterialTheme.typography.labelSmall,
                                 color = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
@@ -115,7 +117,7 @@ fun EventCard(
                     IconButton(onClick = onEdit, modifier = Modifier.size(32.dp)) {
                         Icon(
                             Icons.Default.Edit,
-                            contentDescription = "Редактировать",
+                            contentDescription = stringResource(R.string.edit),
                             tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.size(20.dp)
                         )
@@ -123,7 +125,7 @@ fun EventCard(
                     IconButton(onClick = onDelete, modifier = Modifier.size(32.dp)) {
                         Icon(
                             Icons.Default.Delete,
-                            contentDescription = "Удалить",
+                            contentDescription = stringResource(R.string.delete),
                             tint = MaterialTheme.colorScheme.error,
                             modifier = Modifier.size(20.dp)
                         )
