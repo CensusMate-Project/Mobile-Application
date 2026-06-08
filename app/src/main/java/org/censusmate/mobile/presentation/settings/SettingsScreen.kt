@@ -302,7 +302,7 @@ fun SettingsScreen(
                                 )
                             },
                             title = { Text(stringResource(R.string.exit_from_account)) },
-                            text = { Text(stringResource(R.string.confirme_logout)) },
+                            text = { Text(stringResource(R.string.confirm_logout)) },
                             confirmButton = {
                                 Button(
                                     onClick = {
