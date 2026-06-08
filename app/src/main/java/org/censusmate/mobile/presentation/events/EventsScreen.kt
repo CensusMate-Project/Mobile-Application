@@ -38,9 +38,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import org.censusmate.mobile.R
 import org.censusmate.mobile.domain.model.Event
 import org.censusmate.mobile.domain.usecase.auth.GetMeUseCase
 import org.censusmate.mobile.domain.usecase.event.DeleteEventUseCase
@@ -96,13 +98,13 @@ fun EventsScreen(
 
     Scaffold(topBar = {
         TopAppBar(
-            title = { Text("События переписи") }, navigationIcon = {
+            title = { Text(stringResource(R.string.census_events)) }, navigationIcon = {
             IconButton(onClick = onBack) {
                 Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
             }
         }, actions = {
             IconButton(onClick = onRefresh) {
-                Icon(Icons.Default.Refresh, contentDescription = "Обновить")
+                Icon(Icons.Default.Refresh, contentDescription = stringResource(R.string.update))
             }
         }, colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primary,
@@ -114,7 +116,7 @@ fun EventsScreen(
     }, floatingActionButton = {
         if (state is EventsViewModel.State.Success && state.isAdmin) {
             FloatingActionButton(onClick = onNavigateToCreate) {
-                Icon(Icons.Default.Add, contentDescription = "Создать событие")
+                Icon(Icons.Default.Add, contentDescription = stringResource(R.string.create_event))
             }
         }
     }) { padding ->
@@ -140,7 +142,7 @@ fun EventsScreen(
                         verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
                         Text(state.message, color = MaterialTheme.colorScheme.error)
-                        Button(onClick = onRefresh) { Text("Повторить") }
+                        Button(onClick = onRefresh) { Text(stringResource(R.string.repeat)) }
                     }
                 }
             }
@@ -164,13 +166,16 @@ fun EventsScreen(
                                 tint = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                             Text(
-                                text = if (state.isAdmin) "Нет событий" else "Нет активных событий",
+                                text = if (state.isAdmin)
+                                    stringResource(R.string.no_events_found)
+                                else
+                                    stringResource(R.string.no_active_events_found),
                                 style = MaterialTheme.typography.titleMedium,
                                 color = MaterialTheme.colorScheme.onSurfaceVariant
                             )
                             if (state.isAdmin) {
                                 Text(
-                                    text = "Нажмите + чтобы создать",
+                                    text = stringResource(R.string.press_plus_to_create),
                                     style = MaterialTheme.typography.bodySmall,
                                     color = MaterialTheme.colorScheme.onSurfaceVariant
                                 )
@@ -202,7 +207,7 @@ fun EventsScreen(
                                     contentAlignment = Alignment.Center
                                 ) {
                                     TextButton(onClick = onLoadNextPage) {
-                                        Text("Загрузить ещё")
+                                        Text(stringResource(R.string.load_more))
                                     }
                                 }
                             }
@@ -221,18 +226,18 @@ fun EventsScreen(
                     Icons.Default.DeleteForever, null, tint = MaterialTheme.colorScheme.error
                 )
             },
-            title = { Text("Удалить событие?") },
-            text = { Text("Событие «${event.name}» будет удалено.") },
+            title = { Text(stringResource(R.string.delete_event)) },
+            text = { Text(stringResource(R.string.event_delete_confirmation, event.name)) },
             confirmButton = {
                 Button(
                     onClick = { onDelete(event.id); eventToDelete = null },
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.error
                     )
-                ) { Text("Удалить") }
+                ) { Text(stringResource(R.string.delete)) }
             },
             dismissButton = {
-                TextButton(onClick = { eventToDelete = null }) { Text("Отмена") }
+                TextButton(onClick = { eventToDelete = null }) { Text(stringResource(R.string.cancel)) }
             }
         )
     }
@@ -240,7 +245,7 @@ fun EventsScreen(
 
 private val previewEvents = listOf(
     Event(
-        "1", "Перепись 2025",
+        "1", "Перепись 2026",
         "2026-01-01T00:00:00", "2026-12-31T23:59:59",
         true, "2026-01-01T00:00:00", null
     )

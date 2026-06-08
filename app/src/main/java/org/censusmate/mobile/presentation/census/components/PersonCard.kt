@@ -23,6 +23,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import org.censusmate.mobile.R
 import org.censusmate.mobile.domain.model.Person
 
 @Composable
@@ -68,14 +70,14 @@ fun PersonCard(person: Person, onDelete: () -> Unit) {
                 ) {
                     Text(
                         text = person.gender?.let {
-                            if (it == "male") "Мужчина" else "Женщина"
-                        } ?: "Житель",
+                            if (it == "male") stringResource(R.string.gender_male) else stringResource(R.string.gender_female)
+                        } ?: stringResource(R.string.resident_default),
                         style = MaterialTheme.typography.titleSmall,
                         fontWeight = FontWeight.SemiBold
                     )
                     person.relationToHousehold?.let {
                         Text(
-                            text = "• $it",
+                            text = stringResource(R.string.relation_bullet, it),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.primary
                         )
@@ -83,7 +85,7 @@ fun PersonCard(person: Person, onDelete: () -> Unit) {
                 }
 
                 Text(
-                    text = "Дата рождения: ${person.birthDate}",
+                    text = stringResource(R.string.birth_date_value, person.birthDate),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -98,20 +100,20 @@ fun PersonCard(person: Person, onDelete: () -> Unit) {
                     person.educationLevel?.let {
                         PersonTag(
                             text = when (it) {
-                                "higher" -> "Высшее"
-                                "secondary" -> "Среднее"
-                                "primary" -> "Начальное"
-                                else -> "Без образования"
+                                "higher" -> stringResource(R.string.higher_education)
+                                "secondary" -> stringResource(R.string.secondary_education)
+                                "primary" -> stringResource(R.string.primary_education)
+                                else -> stringResource(R.string.without_education)
                             }
                         )
                     }
                     person.employmentStatus?.let {
                         PersonTag(
                             text = when (it) {
-                                "employed" -> "Работает"
-                                "unemployed" -> "Безработный"
-                                "student" -> "Студент"
-                                "retired" -> "Пенсионер"
+                                "employed" -> stringResource(R.string.employment_work)
+                                "unemployed" -> stringResource(R.string.employment_unemployed)
+                                "student" -> stringResource(R.string.employment_student)
+                                "retired" -> stringResource(R.string.employment_retiree)
                                 else -> it
                             }
                         )
@@ -125,7 +127,7 @@ fun PersonCard(person: Person, onDelete: () -> Unit) {
             ) {
                 Icon(
                     imageVector = Icons.Default.Delete,
-                    contentDescription = "Удалить",
+                    contentDescription = stringResource(R.string.delete),
                     tint = MaterialTheme.colorScheme.error,
                     modifier = Modifier.size(18.dp)
                 )

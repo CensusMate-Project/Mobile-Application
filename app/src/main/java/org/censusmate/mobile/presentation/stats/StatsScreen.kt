@@ -21,10 +21,12 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import org.censusmate.mobile.R
 import org.censusmate.mobile.domain.model.Event
 import org.censusmate.mobile.domain.model.LanguageCount
 import org.censusmate.mobile.domain.model.Stats
@@ -68,7 +70,7 @@ fun StatsScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Статистика") }, navigationIcon = {
+                title = { Text(stringResource(R.string.statistics)) }, navigationIcon = {
                 IconButton(onClick = onBack) {
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
                 }
@@ -117,7 +119,7 @@ fun StatsScreen(
                         modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
                     ) {
                         Text(
-                            text = "Выберите событие для просмотра статистики",
+                            text = stringResource(R.string.select_event_to_view_statistics),
                             style = MaterialTheme.typography.bodyLarge,
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                             textAlign = TextAlign.Center

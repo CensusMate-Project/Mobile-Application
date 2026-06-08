@@ -29,7 +29,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import org.censusmate.mobile.R
 import java.util.Calendar
 import java.util.TimeZone
 
@@ -121,16 +123,16 @@ private fun TimePickerDialog(
     onDismiss: () -> Unit, onConfirm: () -> Unit, content: @Composable () -> Unit
 ) {
     AlertDialog(onDismissRequest = onDismiss, confirmButton = {
-        TextButton(onClick = onConfirm) { Text("Выбрать") }
+        TextButton(onClick = onConfirm) { Text(stringResource(R.string.choose)) }
     }, dismissButton = {
-        TextButton(onClick = onDismiss) { Text("Отмена") }
+        TextButton(onClick = onDismiss) { Text(stringResource(R.string.cancel)) }
     }, text = {
         Column(
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                text = "Выберите время",
+                text = stringResource(R.string.сhoose_time),
                 style = MaterialTheme.typography.labelLarge,
                 modifier = Modifier
                     .align(Alignment.Start)

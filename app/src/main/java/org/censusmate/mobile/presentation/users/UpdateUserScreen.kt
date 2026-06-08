@@ -37,12 +37,14 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import org.censusmate.mobile.R
 import org.censusmate.mobile.domain.model.Role
 import org.censusmate.mobile.domain.model.User
 import org.censusmate.mobile.domain.usecase.user.GetUserUseCase
@@ -100,7 +102,7 @@ fun UpdateUserScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Редактировать пользователя") }, navigationIcon = {
+                title = { Text(stringResource(R.string.update_user)) }, navigationIcon = {
                 IconButton(onClick = onBack) {
                     Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
                 }
@@ -144,7 +146,7 @@ fun UpdateUserScreen(
                     OutlinedTextField(
                         value = firstName,
                         onValueChange = { firstName = it },
-                        label = { Text("Имя") },
+                        label = { Text(stringResource(R.string.name)) },
                         leadingIcon = { Icon(Icons.Default.Person, null) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth()
@@ -153,7 +155,7 @@ fun UpdateUserScreen(
                     OutlinedTextField(
                         value = lastName,
                         onValueChange = { lastName = it },
-                        label = { Text("Фамилия") },
+                        label = { Text(stringResource(R.string.surname)) },
                         leadingIcon = { Icon(Icons.Default.Person, null) },
                         singleLine = true,
                         modifier = Modifier.fillMaxWidth()
@@ -162,7 +164,7 @@ fun UpdateUserScreen(
                     OutlinedTextField(
                         value = email,
                         onValueChange = { email = it },
-                        label = { Text("Email") },
+                        label = { Text(stringResource(R.string.email)) },
                         leadingIcon = { Icon(Icons.Default.Email, null) },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                         singleLine = true,
@@ -172,7 +174,7 @@ fun UpdateUserScreen(
                     HorizontalDivider()
 
                     Text(
-                        text = "Новый пароль (оставьте пустым чтобы не менять)",
+                        text = stringResource(R.string.new_password_leave_empty_so_as_not_to_change_it),
                         style = MaterialTheme.typography.labelMedium,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -180,7 +182,7 @@ fun UpdateUserScreen(
                     OutlinedTextField(
                         value = newPassword,
                         onValueChange = { newPassword = it },
-                        label = { Text("Новый пароль") },
+                        label = { Text(stringResource(R.string.new_password)) },
                         leadingIcon = { Icon(Icons.Default.Lock, null) },
                         trailingIcon = {
                             IconButton(onClick = { passwordVisible = !passwordVisible }) {
@@ -204,7 +206,7 @@ fun UpdateUserScreen(
                             .fillMaxWidth()
                             .height(52.dp)
                     ) {
-                        Text("Сохранить", style = MaterialTheme.typography.titleMedium)
+                        Text(stringResource(R.string.save), style = MaterialTheme.typography.titleMedium)
                     }
                 }
             }

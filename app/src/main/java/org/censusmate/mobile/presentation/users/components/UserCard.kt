@@ -25,8 +25,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import org.censusmate.mobile.R
 import org.censusmate.mobile.domain.model.User
 
 @Composable
@@ -78,7 +80,7 @@ fun UserCard(
                     if (user.isBlocked) {
                         Icon(
                             imageVector = Icons.Default.Block,
-                            contentDescription = "Заблокирован",
+                            contentDescription = stringResource(R.string.blocked),
                             tint = MaterialTheme.colorScheme.error,
                             modifier = Modifier.size(16.dp)
                         )
@@ -90,7 +92,10 @@ fun UserCard(
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
                 Text(
-                    text = if (user.isAdmin) "Администратор" else "Переписчик",
+                    text = if (user.isAdmin)
+                        stringResource(R.string.administrator_role)
+                    else
+                        stringResource(R.string.agent_role),
                     style = MaterialTheme.typography.labelSmall,
                     color = if (user.isAdmin) MaterialTheme.colorScheme.primary
                     else MaterialTheme.colorScheme.secondary
@@ -103,7 +108,10 @@ fun UserCard(
                     Icon(
                         imageVector = if (user.isBlocked) Icons.Default.LockOpen
                         else Icons.Default.Lock,
-                        contentDescription = if (user.isBlocked) "Разблокировать" else "Заблокировать",
+                        contentDescription = if (user.isBlocked)
+                            stringResource(R.string.unblock)
+                        else
+                            stringResource(R.string.block),
                         tint = if (user.isBlocked) MaterialTheme.colorScheme.primary
                         else MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.size(20.dp)
@@ -113,7 +121,7 @@ fun UserCard(
                 IconButton(onClick = onEdit, modifier = Modifier.size(32.dp)) {
                     Icon(
                         imageVector = Icons.Default.Edit,
-                        contentDescription = "Редактировать",
+                        contentDescription = stringResource(R.string.edit),
                         tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(20.dp)
                     )

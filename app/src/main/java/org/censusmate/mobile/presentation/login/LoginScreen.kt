@@ -36,6 +36,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -44,6 +45,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import org.censusmate.mobile.R
 import org.censusmate.mobile.domain.usecase.auth.GetMeUseCase
 import org.censusmate.mobile.domain.usecase.auth.LoginUseCase
 import org.censusmate.mobile.ui.theme.MobileApplicationTheme
@@ -110,14 +112,14 @@ fun LoginScreen(
             )
 
             Text(
-                text = "CensusMate",
+                text = stringResource(R.string.censusmate),
                 style = MaterialTheme.typography.headlineMedium,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary
             )
 
             Text(
-                text = "Войдите в систему",
+                text = stringResource(R.string.login_to_system),
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -128,7 +130,7 @@ fun LoginScreen(
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
-                label = { Text("Email") },
+                label = { Text(stringResource(R.string.email)) },
                 leadingIcon = {
                     Icon(Icons.Default.Email, contentDescription = null)
                 },
@@ -145,7 +147,7 @@ fun LoginScreen(
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
-                label = { Text("Пароль") },
+                label = { Text(stringResource(R.string.password)) },
                 leadingIcon = {
                     Icon(Icons.Default.Lock, contentDescription = null)
                 },
@@ -207,7 +209,7 @@ fun LoginScreen(
                     )
                 } else {
                     Text(
-                        text = "Войти",
+                        text = stringResource(R.string.login),
                         style = MaterialTheme.typography.titleMedium
                     )
                 }

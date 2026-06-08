@@ -20,6 +20,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import org.censusmate.mobile.R
 import java.util.Calendar
 import java.util.TimeZone
 
@@ -68,9 +70,9 @@ fun DatePickerField(
                     datePickerState.selectedDateMillis?.toFormattedDate()?.let { onValueChange(it) }
                     showPicker = false
                 }
-            ) { Text("Выбрать") }
+            ) { Text(stringResource(R.string.choose)) }
         }, dismissButton = {
-            TextButton(onClick = { showPicker = false }) { Text("Отмена") }
+            TextButton(onClick = { showPicker = false }) { Text(stringResource(R.string.cancel)) }
         }) {
             DatePicker(state = datePickerState)
         }

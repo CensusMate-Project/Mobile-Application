@@ -27,6 +27,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import org.censusmate.mobile.R
 import org.censusmate.mobile.presentation.census.PersonForm
 import org.censusmate.mobile.ui.components.DatePickerField
 import org.censusmate.mobile.ui.components.SheetSectionLabel
@@ -63,118 +65,118 @@ fun AddPersonBottomSheet(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             Text(
-                text = "Добавить жителя",
+                text = stringResource(R.string.add_resident),
                 style = MaterialTheme.typography.titleLarge,
                 fontWeight = FontWeight.Bold
             )
 
             // Пол
-            SheetSectionLabel("Пол")
+            SheetSectionLabel(stringResource(R.string.gender))
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 FilterChip(
                     selected = gender == "male",
                     onClick = { gender = if (gender == "male") "" else "male" },
-                    label = { Text("Мужской") })
+                    label = { Text(stringResource(R.string.gender_male_chip)) })
                 FilterChip(
                     selected = gender == "female",
                     onClick = { gender = if (gender == "female") "" else "female" },
-                    label = { Text("Женский") })
+                    label = { Text(stringResource(R.string.gender_female_chip)) })
             }
 
             // Дата рождения
             DatePickerField(
                 value = birthDate,
                 onValueChange = { birthDate = it },
-                label = "Дата рождения *",
+                label = stringResource(R.string.birth_date_label),
                 modifier = Modifier.fillMaxWidth()
             )
 
             // Гражданство
-            SheetSectionLabel("Гражданство")
+            SheetSectionLabel(stringResource(R.string.citizenship))
             OutlinedTextField(
                 value = citizenship,
                 onValueChange = { citizenship = it },
-                label = { Text("Гражданство") },
+                label = { Text(stringResource(R.string.citizenship)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth()
             )
 
-            SheetSectionLabel("Двойное гражданство")
+            SheetSectionLabel(stringResource(R.string.dual_citizenship))
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 FilterChip(selected = hasDualCitizenship == true, onClick = {
                     hasDualCitizenship = if (hasDualCitizenship == true) null else true
-                }, label = { Text("Да") })
+                }, label = { Text(stringResource(R.string.yes)) })
                 FilterChip(selected = hasDualCitizenship == false, onClick = {
                     hasDualCitizenship = if (hasDualCitizenship == false) null else false
-                }, label = { Text("Нет") })
+                }, label = { Text(stringResource(R.string.no)) })
             }
 
             // Язык
-            SheetSectionLabel("Язык")
+            SheetSectionLabel(stringResource(R.string.language_section))
             OutlinedTextField(
                 value = nationality,
                 onValueChange = { nationality = it },
-                label = { Text("Национальность") },
+                label = { Text(stringResource(R.string.nationality)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth()
             )
             OutlinedTextField(
                 value = nativeLanguage,
                 onValueChange = { nativeLanguage = it },
-                label = { Text("Родной язык") },
+                label = { Text(stringResource(R.string.native_language)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth()
             )
 
-            SheetSectionLabel("Говорит по-русски")
+            SheetSectionLabel(stringResource(R.string.speaks_russian))
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 FilterChip(
                     selected = speaksRussian == true,
                     onClick = { speaksRussian = if (speaksRussian == true) null else true },
-                    label = { Text("Да") })
+                    label = { Text(stringResource(R.string.yes)) })
                 FilterChip(
                     selected = speaksRussian == false,
                     onClick = { speaksRussian = if (speaksRussian == false) null else false },
-                    label = { Text("Нет") })
+                    label = { Text(stringResource(R.string.no)) })
             }
 
             OutlinedTextField(
                 value = otherLanguages,
                 onValueChange = { otherLanguages = it },
-                label = { Text("Другие языки (через запятую)") },
+                label = { Text(stringResource(R.string.other_languages_hint)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth()
             )
 
             // Образование
-            SheetSectionLabel("Образование")
+            SheetSectionLabel(stringResource(R.string.education))
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 listOf(
-                    "none" to "Нет",
-                    "primary" to "Начальное",
-                    "secondary" to "Среднее",
-                    "higher" to "Высшее"
-                ).forEach { (value, label) ->
+                    "none" to R.string.no,
+                    "primary" to R.string.primary_education,
+                    "secondary" to R.string.secondary_education,
+                    "higher" to R.string.higher_education
+                ).forEach { (value, labelRes) ->
                     FilterChip(
                         selected = educationLevel == value,
                         onClick = { educationLevel = if (educationLevel == value) "" else value },
-                        label = { Text(label) })
+                        label = { Text(stringResource(labelRes)) })
                 }
             }
 
             // Семейное положение
-            SheetSectionLabel("Семейное положение")
+            SheetSectionLabel(stringResource(R.string.marital_status))
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 listOf(
-                    "single" to "Холост/не замужем",
-                    "married" to "В браке",
-                    "divorced" to "Разведён/а",
-                    "widowed" to "Вдовец/вдова"
-                ).forEach { (value, label) ->
+                    "single" to R.string.single_material_status,
+                    "married" to R.string.marriage_material_statis,
+                    "divorced" to R.string.divorced_material_status,
+                    "widowed" to R.string.widower_or_widow_material_status
+                ).forEach { (value, labelRes) ->
                     FilterChip(
                         selected = maritalStatus == value,
                         onClick = { maritalStatus = if (maritalStatus == value) "" else value },
-                        label = { Text(label, style = MaterialTheme.typography.labelSmall) })
+                        label = { Text(stringResource(labelRes), style = MaterialTheme.typography.labelSmall) })
                 }
             }
 
@@ -182,7 +184,7 @@ fun AddPersonBottomSheet(
                 OutlinedTextField(
                     value = childrenCount,
                     onValueChange = { childrenCount = it },
-                    label = { Text("Детей") },
+                    label = { Text(stringResource(R.string.children_count_label)) },
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
                     singleLine = true,
                     modifier = Modifier.weight(1f)
@@ -190,42 +192,42 @@ fun AddPersonBottomSheet(
                 OutlinedTextField(
                     value = relationToHousehold,
                     onValueChange = { relationToHousehold = it },
-                    label = { Text("Роль в семье") },
+                    label = { Text(stringResource(R.string.role_in_family)) },
                     singleLine = true,
                     modifier = Modifier.weight(1f)
                 )
             }
 
             // Место рождения или проживания
-            SheetSectionLabel("Место рождения / проживания")
+            SheetSectionLabel(stringResource(R.string.birth_residence_section))
             OutlinedTextField(
                 value = placeOfBirth,
                 onValueChange = { placeOfBirth = it },
-                label = { Text("Место рождения") },
+                label = { Text(stringResource(R.string.place_of_birth)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth()
             )
             OutlinedTextField(
                 value = currentResidence,
                 onValueChange = { currentResidence = it },
-                label = { Text("Текущее место проживания") },
+                label = { Text(stringResource(R.string.current_residence)) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth()
             )
 
             // Занятость
-            SheetSectionLabel("Статус занятости")
+            SheetSectionLabel(stringResource(R.string.employment_status_section))
             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 listOf(
-                    "employed" to "Работает",
-                    "unemployed" to "Безработный",
-                    "student" to "Студент",
-                    "retired" to "Пенсионер",
-                    "other" to "Другое"
-                ).forEach { (value, label) ->
+                    "employed" to R.string.employment_work,
+                    "unemployed" to R.string.employment_unemployed,
+                    "student" to R.string.employment_student,
+                    "retired" to R.string.employment_retiree,
+                    "other" to R.string.other
+                ).forEach { (value, labelRes) ->
                     FilterChip(selected = employmentStatus == value, onClick = {
                         employmentStatus = if (employmentStatus == value) "" else value
-                    }, label = { Text(label) })
+                    }, label = { Text(stringResource(labelRes)) })
                 }
             }
 
@@ -258,7 +260,7 @@ fun AddPersonBottomSheet(
                     .height(52.dp),
                 enabled = birthDate.isNotBlank()
             ) {
-                Text("Добавить")
+                Text(stringResource(R.string.add))
             }
         }
     }

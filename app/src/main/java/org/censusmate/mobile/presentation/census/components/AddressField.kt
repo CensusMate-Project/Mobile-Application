@@ -20,6 +20,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import org.censusmate.mobile.R
 import org.censusmate.mobile.domain.model.Address
 import org.censusmate.mobile.domain.usecase.address.SuggestAddressUseCase
 
@@ -47,7 +49,7 @@ fun AddressField(
         OutlinedTextField(
             value = value,
             onValueChange = { onValueChange(it); showSuggestions = false },
-            label = { Text("Адрес *") },
+            label = { Text(stringResource(R.string.address_label)) },
             leadingIcon = { Icon(Icons.Default.LocationOn, null) },
             singleLine = true,
             modifier = Modifier.fillMaxWidth()

@@ -18,6 +18,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import org.censusmate.mobile.R
 import org.censusmate.mobile.presentation.census.PersonForm
 
 @Composable
@@ -60,7 +62,7 @@ fun PersonFormCard(
             IconButton(onClick = onRemove) {
                 Icon(
                     Icons.Default.Close,
-                    contentDescription = "Удалить",
+                    contentDescription = stringResource(R.string.delete),
                     tint = MaterialTheme.colorScheme.error
                 )
             }
