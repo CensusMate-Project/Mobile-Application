@@ -74,4 +74,6 @@
     <string name="add_user">Добавить пользователя</string>
     <string name="repeat">Повторить</string>
     <string name="load_more">Загрузить ещё</string>
+    <string name="choose">Выбрать</string>
+    <string name="сhoose_time">Выберите время</string>
 </resources>
