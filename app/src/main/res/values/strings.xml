@@ -57,4 +57,21 @@
     <string name="other_languages">Другие языки</string>
     <string name="statistics">Статистика</string>
     <string name="select_event_to_view_statistics">Выберите событие для просмотра статистики</string>
+    <string name="blocked">Заблокирован</string>
+    <string name="unblock">Разблокировать</string>
+    <string name="block">Заблокировать</string>
+    <string name="edit">Редактировать</string>
+    <string name="create_user">Создать пользователя</string>
+    <string name="role">Роль</string>
+    <string name="surname">Фамилия</string>
+    <string name="name">Имя</string>
+    <string name="new_user">Новый пользователь</string>
+    <string name="update_user">Редактировать пользователя</string>
+    <string name="new_password">Новый пароль</string>
+    <string name="new_password_leave_empty_so_as_not_to_change_it">Новый пароль (оставьте пустым чтобы не менять)</string>
+    <string name="save">Сохранить</string>
+    <string name="users">Пользователи</string>
+    <string name="add_user">Добавить пользователя</string>
+    <string name="repeat">Повторить</string>
+    <string name="load_more">Загрузить ещё</string>
 </resources>

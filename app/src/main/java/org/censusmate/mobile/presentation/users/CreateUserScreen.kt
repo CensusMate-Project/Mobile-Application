@@ -41,12 +41,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import org.censusmate.mobile.R
 import org.censusmate.mobile.domain.usecase.user.CreateUserUseCase
 import org.censusmate.mobile.ui.theme.MobileApplicationTheme
 
@@ -96,7 +98,7 @@ fun CreateUserScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Новый пользователь") },
+                title = { Text(stringResource(R.string.new_user)) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, null)
@@ -122,7 +124,7 @@ fun CreateUserScreen(
             OutlinedTextField(
                 value = firstName,
                 onValueChange = { firstName = it },
-                label = { Text("Имя") },
+                label = { Text(stringResource(R.string.name)) },
                 leadingIcon = { Icon(Icons.Default.Person, null) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
@@ -132,7 +134,7 @@ fun CreateUserScreen(
             OutlinedTextField(
                 value = lastName,
                 onValueChange = { lastName = it },
-                label = { Text("Фамилия") },
+                label = { Text(stringResource(R.string.surname)) },
                 leadingIcon = { Icon(Icons.Default.Person, null) },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
@@ -142,7 +144,7 @@ fun CreateUserScreen(
             OutlinedTextField(
                 value = email,
                 onValueChange = { email = it },
-                label = { Text("Email") },
+                label = { Text(stringResource(R.string.email)) },
                 leadingIcon = { Icon(Icons.Default.Email, null) },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                 singleLine = true,
@@ -153,7 +155,7 @@ fun CreateUserScreen(
             OutlinedTextField(
                 value = password,
                 onValueChange = { password = it },
-                label = { Text("Пароль") },
+                label = { Text(stringResource(R.string.password)) },
                 leadingIcon = { Icon(Icons.Default.Lock, null) },
                 trailingIcon = {
                     IconButton(onClick = { passwordVisible = !passwordVisible }) {
@@ -174,7 +176,7 @@ fun CreateUserScreen(
 
             // Role choose
             Text(
-                text = "Роль",
+                text = stringResource(R.string.role),
                 style = MaterialTheme.typography.labelLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant
             )
@@ -182,7 +184,7 @@ fun CreateUserScreen(
                 FilterChip(
                     selected = role == "agent",
                     onClick = { role = "agent" },
-                    label = { Text("Переписчик") },
+                    label = { Text(stringResource(R.string.agent_role)) },
                     leadingIcon = {
                         if (role == "agent") Icon(
                             Icons.Default.Check, null,
@@ -193,7 +195,7 @@ fun CreateUserScreen(
                 FilterChip(
                     selected = role == "administrator",
                     onClick = { role = "administrator" },
-                    label = { Text("Администратор") },
+                    label = { Text(stringResource(R.string.administrator_role)) },
                     leadingIcon = {
                         if (role == "administrator") Icon(
                             Icons.Default.Check, null,
@@ -244,7 +246,7 @@ fun CreateUserScreen(
                         strokeWidth = 2.dp
                     )
                 } else {
-                    Text("Создать пользователя", style = MaterialTheme.typography.titleMedium)
+                    Text(stringResource(R.string.create_user), style = MaterialTheme.typography.titleMedium)
                 }
             }
         }
