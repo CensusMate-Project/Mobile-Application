@@ -33,6 +33,7 @@ class CensusApi(tokenDataStore: TokenDataStore) {
         }
         install(Auth) {
             bearer {
+                cacheTokens = false
                 loadTokens {
                     val token = tokenDataStore.get()
                     if (token != null) BearerTokens(token, "") else null
